@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {AlledrogoProductsModule} from "./alledrogo-products/alledrogo-products.module";
 
+
+
 @NgModule({
   declarations: [
     AppComponent
@@ -12,7 +14,9 @@ import {AlledrogoProductsModule} from "./alledrogo-products/alledrogo-products.m
   imports: [
     BrowserModule,
     HttpClientModule,
-    AlledrogoProductsModule
+    AlledrogoProductsModule,
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]
