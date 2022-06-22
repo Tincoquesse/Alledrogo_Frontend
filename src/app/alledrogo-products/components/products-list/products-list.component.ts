@@ -26,5 +26,8 @@ export class ProductsListComponent implements OnInit {
       this.products = results
     });
   }
-  onItemDone = (name: string) => this.alleService.addProductToBasket(name);
+  onItemDone = (name: string) => {
+    this.alleService.addProductToBasket(name);
+    this.refreshPage();
+  }
 }

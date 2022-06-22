@@ -26,7 +26,7 @@ export class AlledrogoService {
 
 
   removeFromBasket = (name: string) =>
-    this.http.post(`${environment.alledrogoEndpointUrl}product/removeFromBasket/koszyk3/${name}`, null)
+    this.http.delete(`${environment.alledrogoEndpointUrl}product/removeFromBasket/koszyk3/${name}`)
       .subscribe();
 }
 

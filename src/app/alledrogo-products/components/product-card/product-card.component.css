@@ -1,6 +1,6 @@
 body{
   margin-top:20px;
-  background:#eee;
+  /*background:#eee;*/
 }
 
 .product-content {
@@ -20,7 +20,7 @@ body{
 .product-content .product-image {
   background-color: #fff;
   display: block;
-  min-height: 238px;
+  min-height: 150px;
   overflow: hidden;
   position: relative
 }
@@ -233,7 +233,7 @@ body{
 .product-deatil .price-container {
   font-size: 24px;
   margin: 0;
-  font-weight: 300
+  font-weight: 200
 }
 
 .product-deatil .price-container small {

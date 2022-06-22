@@ -15,7 +15,9 @@ export class BasketProductListComponent implements OnInit {
   constructor(private alleService: AlledrogoService) {
   }
 
-
+  refreshPage() {
+    window.location.reload();
+  }
 
   ngOnInit(): void {
     this.alleService.getProductsFromBasket().pipe(
@@ -25,12 +27,8 @@ export class BasketProductListComponent implements OnInit {
     });
   }
 
-  onItemDelete = (name: string) => {
+  onItemDelete = (name: any) => {
     this.alleService.removeFromBasket(name);
-    this.alleService.getProductsFromBasket().pipe(
-      map(data => data as Product[]),
-    ).subscribe(results => {
-      this.products = results
-    });
+    this.refreshPage();
   }
 }
