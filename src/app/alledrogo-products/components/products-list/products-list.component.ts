@@ -12,7 +12,12 @@ export class ProductsListComponent implements OnInit {
 
   products: Product[] = [];
 
-  constructor(private alleService: AlledrogoService) { }
+  constructor(private alleService: AlledrogoService) {
+  }
+
+  refreshPage() {
+    window.location.reload();
+  }
 
   ngOnInit(): void {
     this.alleService.getProducts().pipe(
@@ -21,5 +26,5 @@ export class ProductsListComponent implements OnInit {
       this.products = results
     });
   }
-
+  onItemDone = (name: string) => this.alleService.addProductToBasket(name);
 }

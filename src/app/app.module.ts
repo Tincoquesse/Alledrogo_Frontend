@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {AlledrogoProductsModule} from "./alledrogo-products/alledrogo-products.module";
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -15,7 +16,7 @@ import {AlledrogoProductsModule} from "./alledrogo-products/alledrogo-products.m
     BrowserModule,
     HttpClientModule,
     AlledrogoProductsModule,
-
+    FormsModule
 
   ],
   providers: [],

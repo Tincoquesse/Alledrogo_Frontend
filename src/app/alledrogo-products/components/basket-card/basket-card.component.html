@@ -1,0 +1,22 @@
+<div class="card mb-3 ">
+  <div class="card-body ">
+    <div class="d-flex flex-column flex-lg-row gap-1">
+      <span class=" avatar avatar-text rounded-3 me-4 mb-2">PD</span>
+      <div class="row flex-fill">
+        <div class="col-sm-5">
+          <h4 class="h6">{{product?.productName}}</h4>
+          <span class="badge bg-secondary">WORLDWIDE</span> <span class="badge bg-success">$ {{product?.productPrice}}</span>
+        </div>
+        <div class="col-sm-4 py-2">
+          <span class="badge bg-secondary">REACT</span>
+          <span class="badge bg-secondary">NODE</span>
+          <span class="badge bg-secondary">TYPESCRIPT</span>
+          <span class="badge bg-secondary">JUNIOR</span>
+        </div>
+        <div class="col-sm-3 text-lg-end">
+          <a href="#" class="btn btn-primary stretched-link" (click)="doneClick()">DELETE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
