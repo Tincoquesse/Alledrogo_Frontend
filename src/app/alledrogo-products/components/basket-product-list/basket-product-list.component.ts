@@ -28,7 +28,7 @@ export class BasketProductListComponent implements OnInit {
   }
 
   onItemDelete = (name: any) => {
-    this.alleService.removeFromBasket(name);
-    this.refreshPage();
+    this.alleService.removeFromBasket(name).add(this.refreshPage);
+
   }
 }
