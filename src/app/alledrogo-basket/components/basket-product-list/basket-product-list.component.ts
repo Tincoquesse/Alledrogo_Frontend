@@ -1,4 +1,4 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Product} from "../../../api/model/product";
 import {AlledrogoService} from "../../../api/service/alledrogo.service";
 import {map} from "rxjs";
@@ -15,11 +15,7 @@ export class BasketProductListComponent implements OnInit {
   constructor(private alleService: AlledrogoService) {
   }
 
-  refreshPage() {
-    window.location.reload();
-  }
-
-  ngOnInit(): void {
+  getAll(): void {
     this.alleService.getProductsFromBasket().pipe(
       map(data => data as Product[]),
     ).subscribe(results => {
@@ -27,8 +23,21 @@ export class BasketProductListComponent implements OnInit {
     });
   }
 
-  onItemDelete = (name: any) => {
-    this.alleService.removeFromBasket(name);
+  deleteFromProducts(name: string): void {
+    for (let product of this.products) {
+      if (product.productName === name) {
+        this.products.splice(this.products.indexOf(product), 1);
+        break;
+      }
+    }
+  }
 
+  ngOnInit(): void {
+    this.getAll();
+  }
+
+  onItemDelete = (name: string) => {
+    this.alleService.removeFromBasket(name);
+    this.deleteFromProducts(name);
   }
 }

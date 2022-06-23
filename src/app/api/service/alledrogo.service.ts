@@ -17,7 +17,7 @@ export class AlledrogoService {
     this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}product/getAll`);
 
   addProductToBasket = (name: string) => {
-    this.http.post(`${environment.alledrogoEndpointUrl}product/addToBasket/koszyk3/${name}`, null)
+    return this.http.post(`${environment.alledrogoEndpointUrl}product/addToBasket/koszyk3/${name}`, null)
       .subscribe();
   }
 
@@ -27,6 +27,7 @@ export class AlledrogoService {
 
   removeFromBasket = (name: string) =>
     this.http.delete(`${environment.alledrogoEndpointUrl}product/removeFromBasket/koszyk3/${name}`)
-      .subscribe();
+      .subscribe(
+      );
 }
 
