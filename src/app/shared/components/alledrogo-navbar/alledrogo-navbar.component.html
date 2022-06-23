@@ -1,0 +1,6 @@
+<ul class="nav justify-content-center nav-pills nav-pills" style="padding: 20px; ">
+  <li *ngFor="let link of routes" class="nav-item " routerLink="{{ link.route }}">
+    <a class="nav-link bg-primary " routerLinkActive="active">{{ link.label }}</a>
+  </li>
+</ul>
+

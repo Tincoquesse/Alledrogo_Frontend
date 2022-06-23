@@ -28,6 +28,5 @@ export class ProductsListComponent implements OnInit {
   }
   onItemDone = (name: string) => {
     this.alleService.addProductToBasket(name);
-    this.refreshPage();
   }
 }

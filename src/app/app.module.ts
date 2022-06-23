@@ -5,6 +5,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {AlledrogoProductsModule} from "./alledrogo-products/alledrogo-products.module";
 import {FormsModule} from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
+import {SharedModule} from "./shared/shared.module";
+import {AlledrogoBasketModule} from "./alledrogo-basket/alledrogo-basket.module";
 
 
 
@@ -18,7 +20,9 @@ import { AppRoutingModule } from './app-routing.module';
     HttpClientModule,
     AlledrogoProductsModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule,
+    AlledrogoBasketModule
 
   ],
   providers: [],

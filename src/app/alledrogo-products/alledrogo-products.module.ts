@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AlledrogoProductsPageComponent } from './pages/alledrogo-products-page/alledrogo-products-page.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductsListComponent } from './components/products-list/products-list.component';
-import { BasketProductListComponent } from './components/basket-product-list/basket-product-list.component';
-import { BasketCardComponent } from './components/basket-card/basket-card.component';
+
 
 
 
@@ -13,8 +12,7 @@ import { BasketCardComponent } from './components/basket-card/basket-card.compon
     AlledrogoProductsPageComponent,
     ProductCardComponent,
     ProductsListComponent,
-    BasketProductListComponent,
-    BasketCardComponent
+
   ],
   exports: [
     AlledrogoProductsPageComponent

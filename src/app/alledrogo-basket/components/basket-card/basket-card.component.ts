@@ -6,15 +6,13 @@ import {Product} from "../../../api/model/product";
   templateUrl: './basket-card.component.html',
   styleUrls: ['./basket-card.component.css']
 })
-export class BasketCardComponent implements OnInit {
+export class BasketCardComponent {
 
   @Input() product: Product|undefined;
   @Output() onDoneClick = new EventEmitter<string>();
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
 
   doneClick = () => {
     this.onDoneClick.emit(this.product?.productName);
