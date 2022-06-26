@@ -10,14 +10,14 @@ import {map} from "rxjs";
 })
 export class BasketProductListComponent implements OnInit {
 
-  products: Product[] = [];
+  public products: Product[] = [];
 
   constructor(private alleService: AlledrogoService) {
   }
 
   getAll(): void {
     this.alleService.getProductsFromBasket().pipe(
-      map(data => data as Product[]),
+      map(data => data as Product[])
     ).subscribe(results => {
       this.products = results
     });
@@ -30,6 +30,7 @@ export class BasketProductListComponent implements OnInit {
         break;
       }
     }
+    this.alleService.decreaseCounter();
   }
 
   ngOnInit(): void {

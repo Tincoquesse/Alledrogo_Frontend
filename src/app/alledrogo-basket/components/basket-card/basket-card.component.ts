@@ -14,6 +14,7 @@ export class BasketCardComponent {
   constructor() { }
 
 
+
   doneClick = () => {
     this.onDoneClick.emit(this.product?.productName);
   }

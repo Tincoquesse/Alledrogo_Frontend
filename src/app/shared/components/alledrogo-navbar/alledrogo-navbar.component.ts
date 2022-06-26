@@ -1,4 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Product} from "../../../api/model/product";
+import {map} from "rxjs";
+import {AlledrogoService} from "../../../api/service/alledrogo.service";
 
 @Component({
   selector: 'app-alledrogo-navbar',
@@ -7,11 +10,16 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class AlledrogoNavbarComponent implements OnInit {
 
+
   @Input() routes: { label: string, route: string }[] = [];
 
-  constructor() { }
+  count: number|undefined;
 
-  ngOnInit(): void {
+
+  constructor(public service: AlledrogoService) {
   }
-
+  ngOnInit() {
+  this.service.updateCounter();
+  this.count = this.service.count;
+  }
 }

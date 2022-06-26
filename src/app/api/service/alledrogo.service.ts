@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Product} from "../model/product";
 import {environment} from "../../../environments/environment";
-import {Observable} from 'rxjs';
+import {map, Observable} from 'rxjs';
 
 
 @Injectable({
@@ -11,6 +11,22 @@ import {Observable} from 'rxjs';
 export class AlledrogoService {
 
   constructor(private http: HttpClient) {
+  }
+
+
+  public count: number = 0;
+  public basketProduct: Product[] = []
+
+  increaseCounter = ():void => {
+  this.count++;
+  }
+
+  decreaseCounter = ():void => {
+    this.count--;
+  }
+
+  updateCounter = ():void => {
+   this.getProductsFromBasket().subscribe(data =>  this.count = data.length);
   }
 
   getProducts = (): Observable<Product[]> =>

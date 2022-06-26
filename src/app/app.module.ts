@@ -9,11 +9,10 @@ import {SharedModule} from "./shared/shared.module";
 import {AlledrogoBasketModule} from "./alledrogo-basket/alledrogo-basket.module";
 
 
-
-// @ts-ignore
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
   ],
   imports: [
     BrowserModule,

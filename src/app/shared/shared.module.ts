@@ -7,10 +7,12 @@ import { AlledrogoTopLogoComponent } from './components/alledrogo-top-logo/alled
 
 
 
+
 @NgModule({
   declarations: [
     AlledrogoNavbarComponent,
-    AlledrogoTopLogoComponent
+    AlledrogoTopLogoComponent,
+
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { AlledrogoTopLogoComponent } from './components/alledrogo-top-logo/alled
   ],
   exports: [
     AlledrogoNavbarComponent,
-    AlledrogoTopLogoComponent
+    AlledrogoTopLogoComponent,
+
   ]
 })
 export class SharedModule { }

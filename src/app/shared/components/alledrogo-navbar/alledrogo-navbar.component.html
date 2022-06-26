@@ -1,6 +1,9 @@
-<ul class="nav justify-content-center nav-pills nav-pills" style="padding: 20px; ">
+<ul class="nav justify-content-center nav-pills nav-pills" style="padding: 5px; ">
   <li *ngFor="let link of routes" class="nav-item " routerLink="{{ link.route }}">
-    <a class="nav-link bg-primary " routerLinkActive="active">{{ link.label }}</a>
+    <a class="nav-link bg-primary " routerLinkActive="active"
+       *ngIf="!link.label.includes('Basket')">{{ link.label }}</a>
+    <a class="nav-link bg-primary " routerLinkActive="active"
+       *ngIf="link.label.includes('Basket')">{{link.label}} ({{service.count}})</a>
   </li>
 </ul>
 
