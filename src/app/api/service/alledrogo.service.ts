@@ -13,9 +13,9 @@ export class AlledrogoService {
   constructor(private http: HttpClient) {
   }
 
+  totalOrderPrice: number = 0;
+  count: number = 0;
 
-  public count: number = 0;
-  public basketProduct: Product[] = []
 
   increaseCounter = ():void => {
   this.count++;
@@ -25,21 +25,23 @@ export class AlledrogoService {
     this.count--;
   }
 
+
   updateCounter = ():void => {
-   this.getProductsFromBasket().subscribe(data =>  this.count = data.length);
+   this.getProductsFromBasket().subscribe(data =>  this.count = data.length)
+
   }
 
-  getProducts = (): Observable<Product[]> =>
-    this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}product/getAll`);
-
+  getProducts = (): Observable<Product[]> => {
+   return this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}product/getAll`);
+  }
   addProductToBasket = (name: string) => {
     return this.http.post(`${environment.alledrogoEndpointUrl}product/addToBasket/koszyk3/${name}`, null)
       .subscribe();
   }
 
-  getProductsFromBasket = (): Observable<Product[]> =>
-    this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}product/getAllFromBasket/koszyk3`);
-
+  getProductsFromBasket = (): Observable<Product[]> => {
+    return this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}product/getAllFromBasket/koszyk3`);
+  }
 
   removeFromBasket = (name: string) =>
     this.http.delete(`${environment.alledrogoEndpointUrl}product/removeFromBasket/koszyk3/${name}`)

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Product} from "../../../api/model/product";
 import {AlledrogoService} from "../../../api/service/alledrogo.service";
 import {map} from "rxjs";
+import {OrderSnippetComponent} from "../../../shared/components/order-snippet/order-snippet.component";
 
 @Component({
   selector: 'app-basket-product-list',
@@ -12,7 +13,7 @@ export class BasketProductListComponent implements OnInit {
 
   public products: Product[] = [];
 
-  constructor(private alleService: AlledrogoService) {
+  constructor(private alleService: AlledrogoService, public order: OrderSnippetComponent) {
   }
 
   getAll(): void {
@@ -40,5 +41,6 @@ export class BasketProductListComponent implements OnInit {
   onItemDelete = (name: string) => {
     this.alleService.removeFromBasket(name);
     this.deleteFromProducts(name);
+    this.order.deleteFromOrderSnippet(name);
   }
 }

@@ -21,7 +21,7 @@ export class ProductsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.alleService.getProducts().pipe(
-      map(data => data as Product[]),
+      map(data => data as Product[])
     ).subscribe(results => {
       this.products = results
     });
