@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {
   AlledrogoProductsPageComponent
@@ -7,19 +6,38 @@ import {
 import {
   AlledrogoBasketPageComponent
 } from "./alledrogo-basket/pages/alledrogo-basket-page/alledrogo-basket-page.component";
+import {AlledrogoLoginPageComponent} from "./alledrogo-login/pages/alledrogo-login-page/alledrogo-login-page.component";
 
 export const enum RoutesConfig {
   // home= 'home',
+  loginPage = 'alledrogo-login',
   productsPage = 'alledrogo-products',
   basketPage = 'alledrogo-basket'
 }
 
 const routes: Routes = [
-  // {path: RoutesConfig.home, component: HomePageComponent},
-  {path: RoutesConfig.productsPage, component: AlledrogoProductsPageComponent},
-  {path: RoutesConfig.basketPage, component: AlledrogoBasketPageComponent},
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'alledrogo-login'
+  },
+  {
+    path: RoutesConfig.loginPage,
+    component: AlledrogoLoginPageComponent,
+  },
+  {
+    path: RoutesConfig.productsPage,
+    component: AlledrogoProductsPageComponent
+  },
+  {
+    path: RoutesConfig.basketPage,
+    component: AlledrogoBasketPageComponent
+  },
   // {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: '**', component: AlledrogoProductsPageComponent},
+  {
+    path: '**', component:
+    AlledrogoProductsPageComponent
+  },
 ];
 
 @NgModule({

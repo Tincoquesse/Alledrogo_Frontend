@@ -1,8 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {RoutesConfig} from "./app-routing.module";
-import {AlledrogoService} from "./api/service/alledrogo.service";
-import {Product} from "./api/model/product";
-import {map} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -24,6 +21,10 @@ export class AppComponent{
     {
       label: 'Basket',
       route: RoutesConfig.basketPage,
+    },
+    {
+      label: 'Login',
+      route: RoutesConfig.loginPage
     }
     ];
 

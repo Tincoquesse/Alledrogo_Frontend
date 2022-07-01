@@ -7,6 +7,7 @@ import {FormsModule} from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
 import {SharedModule} from "./shared/shared.module";
 import {AlledrogoBasketModule} from "./alledrogo-basket/alledrogo-basket.module";
+import {AlledrogoLoginModule} from "./alledrogo-login/alledrogo-login.module";
 
 
 @NgModule({
@@ -21,7 +22,9 @@ import {AlledrogoBasketModule} from "./alledrogo-basket/alledrogo-basket.module"
     FormsModule,
     AppRoutingModule,
     SharedModule,
-    AlledrogoBasketModule
+    AlledrogoBasketModule,
+    AlledrogoLoginModule
+
 
   ],
   providers: [],
