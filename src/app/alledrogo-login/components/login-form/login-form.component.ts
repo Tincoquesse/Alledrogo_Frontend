@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {AuthenticationService} from "../../../auth/services/authentication.service";
 import {Router} from "@angular/router";
+import {RoutesConfig} from "../../../app-routing.module";
+import {map, NEVER} from "rxjs";
+import {AuthResponse} from "../../../auth/model/authResponse";
+import {TokenStorageService} from "../../../auth/services/token-storage.service";
 
 
 @Component({
@@ -11,27 +15,33 @@ import {Router} from "@angular/router";
 })
 export class LoginFormComponent implements OnInit {
 
-  form: any|undefined = new FormGroup({
+  form: any | undefined = new FormGroup({
     username: new FormControl(''),
     password: new FormControl(''),
   });
 
-  isLoggedIn = false;
-  isLoginFailed = false;
-  errorMessage = '';
-  roles: string[] = []
+  constructor(private auth: AuthenticationService, private tokenStorage: TokenStorageService, private router: Router) {
+  }
 
-  constructor(private auth: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
-
-  }
-    onSubmit(): void {
-
-      let username = this.form.get('username').value;
-      let password = this.form.get('password').value;
-      this.auth.login(username, password);
-
+    if (this.tokenStorage.isLogged()) {
+      console.log(this.tokenStorage.getAccessToken());
     }
+  }
+
+  onSubmit(): void {
+    let username = this.form.get('username').value;
+    let password = this.form.get('password').value;
+    if (username && password) {
+      this.auth.login(username, password)
+        .pipe(map(data => data as AuthResponse))
+        .subscribe(response => {
+          this.tokenStorage.saveTokens(response.access_token, response.refresh_token);
+          this.tokenStorage.setLoggedIn();
+          this.router.navigateByUrl(RoutesConfig.basketPage).then(r => NEVER)
+        });
+    }
+  }
 
 }
