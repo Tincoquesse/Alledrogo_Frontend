@@ -1,5 +1,5 @@
 <!--<button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>-->
-
+<div class="container">
 <div class="modal-body">
   <form (ngSubmit)="onSubmit()" [formGroup]="form" class="form col-md-12 center-block">
     <div class="form-group">
@@ -9,13 +9,16 @@
       <input class="form-control input-lg" formControlName="password" placeholder="Password" type="password">
     </div>
     <div class="form-group">
-      <button class="btn btn-primary btn-lg btn-block">Sign In</button>
-      <span class="pull-right"><a href="#">Register</a></span><span><a href="#">Need help?</a></span>
+      <button *ngIf="tokenStorage.tokenIsNotPresent()" class="btn btn-primary btn-lg btn-block">Sign In</button>
+      <span class="pull-right"><a class="reg-link" (click)="OnRegister()">Register</a></span><span><a href="#">Need help?</a></span>
     </div>
   </form>
+
 </div>
-<div class="modal-footer">
-  <div class="col-md-12">
-    <button aria-hidden="true" class="btn" data-dismiss="modal" type="submit">Cancel</button>
+<div  class="modal-footer">
+
+  <div  class="col-md-12">
+    <button  aria-hidden="false" class="btn" (click)="onCancel()" data-dismiss="modal" type="submit">Cancel</button>
   </div>
+</div>
 </div>

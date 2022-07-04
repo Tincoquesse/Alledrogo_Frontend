@@ -13,13 +13,11 @@ export class AlledrogoNavbarComponent implements OnInit {
 
   @Input() routes: { label: string, route: string }[] = [];
 
-  // count: number|undefined;
-
-
   constructor(public service: AlledrogoService) {
   }
+
   ngOnInit() {
   this.service.updateCounter();
-  // this.count = this.service.count;
+  this.service.updateOrderPrice()
   }
 }

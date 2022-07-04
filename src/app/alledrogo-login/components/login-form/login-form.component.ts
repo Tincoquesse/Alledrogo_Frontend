@@ -6,6 +6,7 @@ import {RoutesConfig} from "../../../app-routing.module";
 import {map, NEVER} from "rxjs";
 import {AuthResponse} from "../../../auth/model/authResponse";
 import {TokenStorageService} from "../../../auth/services/token-storage.service";
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 
 @Component({
@@ -20,13 +21,15 @@ export class LoginFormComponent implements OnInit {
     password: new FormControl(''),
   });
 
-  constructor(private auth: AuthenticationService, private tokenStorage: TokenStorageService, private router: Router) {
+  constructor(private auth: AuthenticationService,
+              public tokenStorage: TokenStorageService, private router: Router,
+              public jwtHelper: JwtHelperService) {
   }
 
 
   ngOnInit(): void {
-    if (this.tokenStorage.isLogged()) {
-      console.log(this.tokenStorage.getAccessToken());
+    if (!this.jwtHelper.isTokenExpired()) {
+      console.log("you are already logged in");
     }
   }
 
@@ -39,9 +42,16 @@ export class LoginFormComponent implements OnInit {
         .subscribe(response => {
           this.tokenStorage.saveTokens(response.access_token, response.refresh_token);
           this.tokenStorage.setLoggedIn();
-          this.router.navigateByUrl(RoutesConfig.basketPage).then(r => NEVER)
+          this.router.navigateByUrl(RoutesConfig.basketPage).then(r => NEVER);
         });
     }
   }
 
+  OnRegister() {
+    this.router.navigateByUrl(RoutesConfig.registerPage).then(r => NEVER);
+  }
+
+  onCancel() {
+    this.router.navigateByUrl(RoutesConfig.productsPage).then(r => NEVER);
+  }
 }

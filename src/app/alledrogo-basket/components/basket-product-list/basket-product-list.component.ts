@@ -36,11 +36,12 @@ export class BasketProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAll();
+    this.alleService.updateOrderPrice()
   }
 
   onItemDelete = (name: string) => {
     this.alleService.removeFromBasket(name);
     this.deleteFromProducts(name);
-    this.order.deleteFromOrderSnippet(name);
+    this.alleService.updateOrderPrice()
   }
 }

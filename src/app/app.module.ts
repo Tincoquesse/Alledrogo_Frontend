@@ -8,7 +8,13 @@ import { AppRoutingModule } from './app-routing.module';
 import {SharedModule} from "./shared/shared.module";
 import {AlledrogoBasketModule} from "./alledrogo-basket/alledrogo-basket.module";
 import {AlledrogoLoginModule} from "./alledrogo-login/alledrogo-login.module";
+import { JwtModule } from "@auth0/angular-jwt";
+import {AlledrogoRegisterModule} from "./alledrogo-register/alledrogo-register.module";
+import {AuthModule} from "./auth/auth.module";
 
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 
 @NgModule({
   declarations: [
@@ -23,7 +29,18 @@ import {AlledrogoLoginModule} from "./alledrogo-login/alledrogo-login.module";
     AppRoutingModule,
     SharedModule,
     AlledrogoBasketModule,
-    AlledrogoLoginModule
+    AlledrogoLoginModule,
+    AlledrogoRegisterModule,
+    AuthModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:8080"],
+        disallowedRoutes: ["http://localhost:8080/api/login", "http://localhost:8080/shop/product/getAll",
+          "http://localhost:8080/api/user/save"],
+        throwNoTokenError: true,
+      },
+    }),
 
 
   ],

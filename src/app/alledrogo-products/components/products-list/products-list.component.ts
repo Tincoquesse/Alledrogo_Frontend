@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AlledrogoService} from "../../../api/service/alledrogo.service";
 import {Product} from "../../../api/model/product";
 import {map} from "rxjs";
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-products-list',
@@ -12,7 +13,7 @@ export class ProductsListComponent implements OnInit {
 
   products: Product[] = [];
 
-  constructor(private alleService: AlledrogoService) {
+  constructor(private alleService: AlledrogoService, private jwtHelper: JwtHelperService) {
   }
 
   refreshPage() {
@@ -25,9 +26,13 @@ export class ProductsListComponent implements OnInit {
     ).subscribe(results => {
       this.products = results
     });
+    this.alleService.updateOrderPrice()
   }
   onItemDone = (name: string) => {
-    this.alleService.addProductToBasket(name);
-    this.alleService.increaseCounter();
+    if (!this.jwtHelper.isTokenExpired()) {
+      this.alleService.addProductToBasket(name);
+      this.alleService.increaseCounter();
+      this.alleService.updateOrderPrice()
+    }
   }
 }

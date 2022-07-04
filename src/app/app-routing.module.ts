@@ -7,9 +7,13 @@ import {
   AlledrogoBasketPageComponent
 } from "./alledrogo-basket/pages/alledrogo-basket-page/alledrogo-basket-page.component";
 import {AlledrogoLoginPageComponent} from "./alledrogo-login/pages/alledrogo-login-page/alledrogo-login-page.component";
+import {
+  AlledrogoRegisterPageComponent
+} from "./alledrogo-register/pages/alledrogo-register-page/alledrogo-register-page.component";
 
 export const enum RoutesConfig {
   // home= 'home',
+  registerPage = 'alledrogo-register',
   loginPage = 'alledrogo-login',
   productsPage = 'alledrogo-products',
   basketPage = 'alledrogo-basket'
@@ -28,6 +32,10 @@ const routes: Routes = [
   {
     path: RoutesConfig.productsPage,
     component: AlledrogoProductsPageComponent
+  },
+  {
+    path: RoutesConfig.registerPage,
+    component: AlledrogoRegisterPageComponent
   },
   {
     path: RoutesConfig.basketPage,

@@ -25,10 +25,18 @@ export class AlledrogoService {
     this.count--;
   }
 
+  products: Product[] = [];
 
+  updateOrderPrice(): void {
+    this.getProductsFromBasket().subscribe(res => this.products = res)
+    let temp = 0;
+    for (let product of this.products){
+      temp += product.productPrice
+    }
+    this.totalOrderPrice = temp;
+  }
   updateCounter = ():void => {
    this.getProductsFromBasket().subscribe(data =>  this.count = data.length)
-
   }
 
   getProducts = (): Observable<Product[]> => {
@@ -43,9 +51,10 @@ export class AlledrogoService {
     return this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}product/getAllFromBasket/koszyk3`);
   }
 
-  removeFromBasket = (name: string) =>
+  removeFromBasket = (name: string) => {
     this.http.delete(`${environment.alledrogoEndpointUrl}product/removeFromBasket/koszyk3/${name}`)
       .subscribe(
       );
+  }
 }
 

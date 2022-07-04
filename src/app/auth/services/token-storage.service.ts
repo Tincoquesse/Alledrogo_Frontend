@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class TokenStorageService {
 
-  private ACCESS_TOKEN = 'accessToken';
-  private REFRESH_TOKEN = 'refreshToken';
+  private ACCESS_TOKEN = 'access_token';
+  private REFRESH_TOKEN = 'refresh_token';
   private loggedIn = false;
 
   constructor() {
@@ -21,6 +21,7 @@ export class TokenStorageService {
 
     window.localStorage.setItem(this.ACCESS_TOKEN, accessTok);
     window.localStorage.setItem(this.REFRESH_TOKEN, refreshTok);
+    this.setLoggedIn();
   }
 
   getAccessToken() {
@@ -34,5 +35,12 @@ export class TokenStorageService {
   }
   setLoggedIn(){
     this.loggedIn = true;
+  }
+  tokenIsNotPresent():boolean {
+    return !window.localStorage.getItem(this.ACCESS_TOKEN);
+  }
+
+  tokenIsPresent():boolean {
+    return !!window.localStorage.getItem(this.ACCESS_TOKEN);
   }
 }
