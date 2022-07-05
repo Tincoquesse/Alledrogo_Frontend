@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: 'root'
@@ -7,9 +8,8 @@ export class TokenStorageService {
 
   private ACCESS_TOKEN = 'access_token';
   private REFRESH_TOKEN = 'refresh_token';
-  private loggedIn = false;
 
-  constructor() {
+  constructor(private jwtHelper: JwtHelperService) {
   }
 
   saveTokens(accessTok: string, refreshTok: string) {
@@ -21,26 +21,33 @@ export class TokenStorageService {
 
     window.localStorage.setItem(this.ACCESS_TOKEN, accessTok);
     window.localStorage.setItem(this.REFRESH_TOKEN, refreshTok);
-    this.setLoggedIn();
   }
 
-  getAccessToken() {
+  getAccessToken():any {
     return window.localStorage.getItem(this.ACCESS_TOKEN);
-  }
+    }
+
   getRefreshToken() {
     return window.localStorage.getItem(this.REFRESH_TOKEN);
   }
-  isLogged(): boolean{
-    return this.loggedIn;
+  isLoggedIn(): boolean{
+    return this.tokenIsPresent() && !this.jwtHelper.isTokenExpired(this.getAccessToken());
   }
-  setLoggedIn(){
-    this.loggedIn = true;
-  }
+
   tokenIsNotPresent():boolean {
     return !window.localStorage.getItem(this.ACCESS_TOKEN);
   }
 
   tokenIsPresent():boolean {
     return !!window.localStorage.getItem(this.ACCESS_TOKEN);
+  }
+
+  clearTokens() {
+    window.localStorage.removeItem(this.ACCESS_TOKEN);
+    window.localStorage.removeItem(this.REFRESH_TOKEN);
+  }
+
+  isTokenExpired(): boolean{
+    return this.jwtHelper.isTokenExpired(this.getAccessToken());
   }
 }

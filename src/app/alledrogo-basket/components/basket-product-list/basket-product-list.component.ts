@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Product} from "../../../api/model/product";
 import {AlledrogoService} from "../../../api/service/alledrogo.service";
 import {map} from "rxjs";
-import {OrderSnippetComponent} from "../../../shared/components/order-snippet/order-snippet.component";
+import {TokenStorageService} from "../../../auth/services/token-storage.service";
+
 
 @Component({
   selector: 'app-basket-product-list',
@@ -13,7 +14,7 @@ export class BasketProductListComponent implements OnInit {
 
   public products: Product[] = [];
 
-  constructor(private alleService: AlledrogoService, public order: OrderSnippetComponent) {
+  constructor(private alleService: AlledrogoService, private tokenStorage: TokenStorageService) {
   }
 
   getAll(): void {
@@ -35,8 +36,8 @@ export class BasketProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAll();
-    this.alleService.updateOrderPrice()
+      this.getAll();
+      this.alleService.updateOrderPrice()
   }
 
   onItemDelete = (name: string) => {

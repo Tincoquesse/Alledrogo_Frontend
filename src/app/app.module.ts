@@ -11,6 +11,7 @@ import {AlledrogoLoginModule} from "./alledrogo-login/alledrogo-login.module";
 import { JwtModule } from "@auth0/angular-jwt";
 import {AlledrogoRegisterModule} from "./alledrogo-register/alledrogo-register.module";
 import {AuthModule} from "./auth/auth.module";
+import {AuthGuard} from "./auth/services/auth.guard";
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -44,7 +45,7 @@ export function tokenGetter() {
 
 
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

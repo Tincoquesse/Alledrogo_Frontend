@@ -26,7 +26,6 @@ export class ProductsListComponent implements OnInit {
     ).subscribe(results => {
       this.products = results
     });
-    this.alleService.updateOrderPrice()
   }
   onItemDone = (name: string) => {
     if (!this.jwtHelper.isTokenExpired()) {

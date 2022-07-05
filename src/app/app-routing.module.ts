@@ -10,6 +10,7 @@ import {AlledrogoLoginPageComponent} from "./alledrogo-login/pages/alledrogo-log
 import {
   AlledrogoRegisterPageComponent
 } from "./alledrogo-register/pages/alledrogo-register-page/alledrogo-register-page.component";
+import {AuthGuard} from "./auth/services/auth.guard";
 
 export const enum RoutesConfig {
   // home= 'home',
@@ -20,11 +21,7 @@ export const enum RoutesConfig {
 }
 
 const routes: Routes = [
-  {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'alledrogo-login'
-  },
+
   {
     path: RoutesConfig.loginPage,
     component: AlledrogoLoginPageComponent,
@@ -39,13 +36,11 @@ const routes: Routes = [
   },
   {
     path: RoutesConfig.basketPage,
-    component: AlledrogoBasketPageComponent
+    component: AlledrogoBasketPageComponent,
+    canActivate: [AuthGuard]
   },
-  // {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {
-    path: '**', component:
-    AlledrogoProductsPageComponent
-  },
+  {path: '', redirectTo: RoutesConfig.productsPage, pathMatch: 'full'},
+
 ];
 
 @NgModule({

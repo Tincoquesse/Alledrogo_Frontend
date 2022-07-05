@@ -41,8 +41,8 @@ export class LoginFormComponent implements OnInit {
         .pipe(map(data => data as AuthResponse))
         .subscribe(response => {
           this.tokenStorage.saveTokens(response.access_token, response.refresh_token);
-          this.tokenStorage.setLoggedIn();
-          this.router.navigateByUrl(RoutesConfig.basketPage).then(r => NEVER);
+          // this.router.navigateByUrl(RoutesConfig.productsPage).then(r => NEVER);
+          window.location.assign(RoutesConfig.productsPage)
         });
     }
   }
@@ -53,5 +53,10 @@ export class LoginFormComponent implements OnInit {
 
   onCancel() {
     this.router.navigateByUrl(RoutesConfig.productsPage).then(r => NEVER);
+  }
+
+  onLogOut() {
+    this.tokenStorage.clearTokens();
+    window.location.assign(RoutesConfig.loginPage);
   }
 }

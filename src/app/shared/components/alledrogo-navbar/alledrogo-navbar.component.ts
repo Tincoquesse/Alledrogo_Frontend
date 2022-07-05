@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Product} from "../../../api/model/product";
 import {map} from "rxjs";
 import {AlledrogoService} from "../../../api/service/alledrogo.service";
+import {TokenStorageService} from "../../../auth/services/token-storage.service";
 
 @Component({
   selector: 'app-alledrogo-navbar',
@@ -13,11 +14,14 @@ export class AlledrogoNavbarComponent implements OnInit {
 
   @Input() routes: { label: string, route: string }[] = [];
 
-  constructor(public service: AlledrogoService) {
+  constructor(public service: AlledrogoService, private tokenStorage: TokenStorageService) {
   }
 
   ngOnInit() {
-  this.service.updateCounter();
-  this.service.updateOrderPrice()
+    if (this.tokenStorage.tokenIsPresent()) {
+      this.service.updateCounter();
+      this.service.updateOrderPrice()
+    }
+    return
   }
 }
