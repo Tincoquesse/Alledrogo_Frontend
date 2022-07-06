@@ -31,7 +31,6 @@ export class ProductsListComponent implements OnInit {
     if (!this.jwtHelper.isTokenExpired()) {
       this.alleService.addProductToBasket(name);
       this.alleService.increaseCounter();
-      this.alleService.updateOrderPrice()
     }
   }
 }

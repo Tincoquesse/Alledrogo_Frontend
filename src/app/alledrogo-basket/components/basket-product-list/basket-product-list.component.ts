@@ -14,7 +14,7 @@ export class BasketProductListComponent implements OnInit {
 
   public products: Product[] = [];
 
-  constructor(private alleService: AlledrogoService, private tokenStorage: TokenStorageService) {
+  constructor(private alleService: AlledrogoService) {
   }
 
   getAll(): void {
@@ -37,12 +37,12 @@ export class BasketProductListComponent implements OnInit {
 
   ngOnInit(): void {
       this.getAll();
-      this.alleService.updateOrderPrice()
+
   }
 
   onItemDelete = (name: string) => {
     this.alleService.removeFromBasket(name);
     this.deleteFromProducts(name);
-    this.alleService.updateOrderPrice()
+
   }
 }

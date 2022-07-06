@@ -4,8 +4,8 @@ import {RouterModule} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
 import { AlledrogoNavbarComponent } from './components/alledrogo-navbar/alledrogo-navbar.component';
 import { AlledrogoTopLogoComponent } from './components/alledrogo-top-logo/alledrogo-top-logo.component';
-import { OrderSnippetComponent } from './components/order-snippet/order-snippet.component';
 import { SumPipe } from './pipes/sum.pipe';
+
 
 
 
@@ -14,7 +14,6 @@ import { SumPipe } from './pipes/sum.pipe';
   declarations: [
     AlledrogoNavbarComponent,
     AlledrogoTopLogoComponent,
-    OrderSnippetComponent,
     SumPipe,
 
   ],

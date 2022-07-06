@@ -43,17 +43,6 @@ export class AlledrogoService {
     return tokenInfo.basketName;
   }
 
-  updateOrderPrice(): void {
-    if (this.tokenStorage.tokenIsPresent()) {
-      this.getProductsFromBasket().subscribe(res => this.products = res)
-      let temp = 0;
-      for (let product of this.products) {
-        temp += product.productPrice
-      }
-      this.totalOrderPrice = temp;
-    }
-    return
-  }
 
   updateCounter = ():void => {
    this.getProductsFromBasket().subscribe(data =>  this.count = data.length)

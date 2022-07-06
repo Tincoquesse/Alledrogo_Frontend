@@ -13,6 +13,7 @@ import {AlledrogoRegisterModule} from "./alledrogo-register/alledrogo-register.m
 import {AuthModule} from "./auth/auth.module";
 import {AuthGuard} from "./auth/services/auth.guard";
 
+
 export function tokenGetter() {
   return localStorage.getItem("access_token");
 }
