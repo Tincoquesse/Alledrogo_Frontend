@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlledrogoTopLogoComponent implements OnInit {
 
-  path: string = "assets/images/logo_alledrogo.png";
+  path: string = "assets/images/linkedin_banner_thick.jpg";
   altText: string = "first image"
   constructor() { }
 
