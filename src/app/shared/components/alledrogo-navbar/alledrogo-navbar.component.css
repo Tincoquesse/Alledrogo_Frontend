@@ -1,8 +1,15 @@
+.fixed{
+  position: fixed;
+  top:0; left:0;
+  width: 100%;
+}
+
 .bigicon {
   color:white;
 }
 .navbar-nav:hover{
   cursor: pointer;
+  bottom: 10px;
 }
 .mix{
   min-height:3rem;

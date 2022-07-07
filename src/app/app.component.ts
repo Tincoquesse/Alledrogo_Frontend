@@ -15,6 +15,10 @@ export class AppComponent{
 
   routes: { label: string, route: string }[] = [
     {
+      label: 'Home',
+      route: RoutesConfig.homePage,
+    },
+    {
       label: 'Products',
       route: RoutesConfig.productsPage,
     },

@@ -11,6 +11,7 @@ import {RoutesConfig} from "../../../app-routing.module";
   templateUrl: './alledrogo-navbar.component.html',
   styleUrls: ['./alledrogo-navbar.component.css']
 })
+
 export class AlledrogoNavbarComponent implements OnInit {
 
 
@@ -22,14 +23,6 @@ export class AlledrogoNavbarComponent implements OnInit {
               private router: Router) {
   }
 
-  getAll(): void {
-    this.service.getProductsFromBasket().pipe(
-      map(data => data as Product[])
-    ).subscribe(results => {
-      this.products = results
-    });
-  }
-
   ngOnInit() {
     if (this.tokenStorage.tokenIsPresent()) {
       this.getAll();
@@ -38,7 +31,30 @@ export class AlledrogoNavbarComponent implements OnInit {
     return
   }
 
+  getAll(): void {
+    this.service.getProductsFromBasket().pipe(
+      map(data => data as Product[])
+    ).subscribe(results => {
+      this.products = results
+    });
+  }
+
   viewCard() {
     this.router.navigateByUrl(RoutesConfig.basketPage);
+  }
+
+  onItemDelete(name:string) {
+    this.service.removeFromBasket(name);
+    this.deleteFromProducts(name);
+  }
+
+  deleteFromProducts(name: string): void {
+    for (let product of this.products) {
+      if (product.productName === name) {
+        this.products.splice(this.products.indexOf(product), 1);
+        break;
+      }
+    }
+    this.service.decreaseCounter();
   }
 }

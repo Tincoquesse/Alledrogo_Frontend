@@ -12,8 +12,8 @@
         <button *ngIf="!tokenStorage.isLoggedIn()"
                 class="btn btn-primary btn-lg btn-block">Sign In
         </button>
-        <span class="pull-right"><a (click)="OnRegister()" class="reg-link">Register</a></span>
-        <span><a *ngIf="tokenStorage.isLoggedIn()" (click)="onLogOut()"  class="reg-link">Log Out</a></span>
+        <span style="font-size: 1.5rem" class="pull-right"><a (click)="OnRegister()" class="reg-link">Register</a></span>
+        <span><a style="font-size: 1.5rem"  *ngIf="tokenStorage.isLoggedIn()" (click)="onLogOut()"  class="reg-link">Log Out</a></span>
       </div>
     </form>
   </div>

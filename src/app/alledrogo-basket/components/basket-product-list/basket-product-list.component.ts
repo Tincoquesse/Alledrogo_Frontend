@@ -37,7 +37,6 @@ export class BasketProductListComponent implements OnInit {
 
   ngOnInit(): void {
       this.getAll();
-
   }
 
   onItemDelete = (name: string) => {

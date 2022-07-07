@@ -11,9 +11,10 @@ import {
   AlledrogoRegisterPageComponent
 } from "./alledrogo-register/pages/alledrogo-register-page/alledrogo-register-page.component";
 import {AuthGuard} from "./auth/services/auth.guard";
+import {AlledrogoHomePageComponent} from "./alledrogo-home/pages/alledrogo-home-page/alledrogo-home-page.component";
 
 export const enum RoutesConfig {
-  // home= 'home',
+  homePage= 'alledrogo-home',
   registerPage = 'alledrogo-register',
   loginPage = 'alledrogo-login',
   productsPage = 'alledrogo-products',
@@ -21,7 +22,10 @@ export const enum RoutesConfig {
 }
 
 const routes: Routes = [
-
+  {
+    path: RoutesConfig.homePage,
+    component: AlledrogoHomePageComponent,
+  },
   {
     path: RoutesConfig.loginPage,
     component: AlledrogoLoginPageComponent,
@@ -39,7 +43,7 @@ const routes: Routes = [
     component: AlledrogoBasketPageComponent,
     canActivate: [AuthGuard]
   },
-  {path: '', redirectTo: RoutesConfig.productsPage, pathMatch: 'full'},
+  {path: '', redirectTo: RoutesConfig.homePage, pathMatch: 'full'},
 
 ];
 

@@ -15,9 +15,7 @@ export class AlledrogoService {
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private tokenStorage: TokenStorageService) {
   }
 
-  totalOrderPrice: number = 0;
   count: number = 0;
-
 
   increaseCounter = (): void => {
     this.count++;
@@ -41,6 +39,11 @@ export class AlledrogoService {
     let token = this.tokenStorage.getAccessToken();
     let tokenInfo = this.getDecodedAccessToken(token);
     return tokenInfo.basketName;
+  }
+  getUserNameFromToken(): string {
+    let token = this.tokenStorage.getAccessToken();
+    let tokenInfo = this.getDecodedAccessToken(token);
+    return tokenInfo.name;
   }
 
 
