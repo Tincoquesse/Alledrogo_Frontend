@@ -7,9 +7,6 @@ import { AlledrogoTopLogoComponent } from './components/alledrogo-top-logo/alled
 import { SumPipe } from './pipes/sum.pipe';
 
 
-
-
-
 @NgModule({
   declarations: [
     AlledrogoNavbarComponent,
