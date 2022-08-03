@@ -1,8 +1,0 @@
-<div class="container ">
-  <div class="text-center mb-5">
-    <h3>Basket</h3>
-    <p class="lead">Products In Basket</p>
-  </div>
-    <app-basket-card (onDoneClick)="onItemDelete($event)"
-      *ngFor="let product of products" [product]="product"></app-basket-card>
-</div>

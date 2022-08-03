@@ -12,7 +12,8 @@ import {TokenStorageService} from "../../auth/services/token-storage.service";
 })
 export class AlledrogoService {
 
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private tokenStorage: TokenStorageService) {
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService,
+              private tokenStorage: TokenStorageService) {
   }
 
   count: number = 0;
