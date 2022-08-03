@@ -16,9 +16,6 @@ export class ProductsListComponent implements OnInit {
   constructor(private alleService: AlledrogoService, private jwtHelper: JwtHelperService) {
   }
 
-  refreshPage() {
-    window.location.reload();
-  }
 
   ngOnInit(): void {
     this.alleService.getProducts().pipe(
@@ -27,10 +24,10 @@ export class ProductsListComponent implements OnInit {
       this.products = results
     });
   }
-  onItemDelete = (name: string) => {
+  addItem = (product: Product) => {
     if (!this.jwtHelper.isTokenExpired()) {
-      this.alleService.addProductToBasket(name);
-      this.alleService.increaseCounter();
+      this.alleService.addProductToBasket(product);
+      // this.alleService.increaseCounter();
     }
   }
 }

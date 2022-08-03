@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Product} from "../model/product";
 import {environment} from "../../../environments/environment";
-import {Observable} from 'rxjs';
+import {Observable, tap} from 'rxjs';
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {TokenStorageService} from "../../auth/services/token-storage.service";
 
@@ -16,6 +16,7 @@ export class AlledrogoService {
   }
 
   count: number = 0;
+  products: Product[] = [];
 
   increaseCounter = (): void => {
     this.count++;
@@ -25,7 +26,6 @@ export class AlledrogoService {
     this.count--;
   }
 
-  products: Product[] = [];
 
   getDecodedAccessToken(token: any): any {
     try {
@@ -40,6 +40,7 @@ export class AlledrogoService {
     let tokenInfo = this.getDecodedAccessToken(token);
     return tokenInfo.basketName;
   }
+
   getUserNameFromToken(): string {
     let token = this.tokenStorage.getAccessToken();
     let tokenInfo = this.getDecodedAccessToken(token);
@@ -47,25 +48,29 @@ export class AlledrogoService {
   }
 
 
-  updateCounter = ():void => {
-   this.getProductsFromBasket().subscribe(data =>  this.count = data.length)
-  }
-
   getProducts = (): Observable<Product[]> => {
-   return this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}product/getAll`);
+    return this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}product/getAll`);
   }
 
-  addProductToBasket = (name: string) => {
-    return this.http.post(`${environment.alledrogoEndpointUrl}product/addToBasket/${this.getBasketName()}/${name}`, null)
+  addProductToBasket = (product: Product) => {
+    this.increaseCounter();
+    this.products.push(product);
+    return this.http.post(`${environment.alledrogoEndpointUrl}product/addToBasket/${this.getBasketName()}/${product.productName}`, null)
       .subscribe();
   }
 
   getProductsFromBasket = (): Observable<Product[]> => {
-    return this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}product/getAllFromBasket/${this.getBasketName()}`);
+    return this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}product/getAllFromBasket/${this.getBasketName()}`)
+      .pipe(tap(results => {
+        this.products = results;
+        this.count = results.length;
+      }));
   }
 
-  removeFromBasket = (name: string) => {
-    this.http.delete(`${environment.alledrogoEndpointUrl}product/removeFromBasket/${this.getBasketName()}/${name}`)
+  removeFromBasket = (product: Product) => {
+    this.decreaseCounter();
+    this.products = this.products.filter(p => p.productName === product.productName)
+    this.http.delete(`${environment.alledrogoEndpointUrl}product/removeFromBasket/${this.getBasketName()}/${product.productName}`)
       .subscribe(
       );
   }

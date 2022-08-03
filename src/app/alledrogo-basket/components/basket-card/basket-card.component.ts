@@ -9,13 +9,13 @@ import {Product} from "../../../api/model/product";
 export class BasketCardComponent {
 
   @Input() product: Product|undefined;
-  @Output() onDoneClick = new EventEmitter<string>();
+  @Output() onDoneClick = new EventEmitter<Product>();
 
   constructor() { }
 
 
 
   doneClick = () => {
-    this.onDoneClick.emit(this.product?.productName);
+    this.onDoneClick.emit(this.product);
   }
 }

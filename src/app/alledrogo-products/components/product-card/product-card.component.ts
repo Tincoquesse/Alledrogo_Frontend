@@ -11,7 +11,7 @@ export class ProductCardComponent implements OnInit {
 
   @Input() product: Product| undefined;
 
-  @Output() onDoneClick = new EventEmitter<string>();
+  @Output() onDoneClick = new EventEmitter<Product>();
 
   constructor() { }
 
@@ -23,6 +23,6 @@ export class ProductCardComponent implements OnInit {
   }
 
   doneClick = () => {
-    this.onDoneClick.emit(this.product?.productName);
+    this.onDoneClick.emit(this.product);
   };
 }

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Product} from "../../../api/model/product";
 import {map} from "rxjs";
 import {AlledrogoService} from "../../../api/service/alledrogo.service";
@@ -12,49 +12,22 @@ import {RoutesConfig} from "../../../app-routing.module";
   styleUrls: ['./alledrogo-navbar.component.css']
 })
 
-export class AlledrogoNavbarComponent implements OnInit {
+export class AlledrogoNavbarComponent {
 
 
   @Input() routes: { label: string, route: string }[] = [];
 
-  products: Product[] = [];
 
   constructor(public service: AlledrogoService, private tokenStorage: TokenStorageService,
               private router: Router) {
-  }
-
-  ngOnInit() {
-    if (this.tokenStorage.tokenIsPresent()) {
-      this.getAll();
-      this.service.updateCounter();
-    }
-    return
-  }
-
-  getAll(): void {
-    this.service.getProductsFromBasket().pipe(
-      map(data => data as Product[])
-    ).subscribe(results => {
-      this.products = results
-    });
   }
 
   viewCard() {
     this.router.navigateByUrl(RoutesConfig.basketPage);
   }
 
-  onItemDelete(name:string) {
-    this.service.removeFromBasket(name);
-    this.deleteFromProducts(name);
+  onItemDelete(product: Product) {
+    this.service.removeFromBasket(product);
   }
 
-  deleteFromProducts(name: string): void {
-    for (let product of this.products) {
-      if (product.productName === name) {
-        this.products.splice(this.products.indexOf(product), 1);
-        break;
-      }
-    }
-    this.service.decreaseCounter();
-  }
 }
