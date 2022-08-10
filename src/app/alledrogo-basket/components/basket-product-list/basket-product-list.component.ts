@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Product} from "../../../api/model/product";
 import {AlledrogoService} from "../../../api/service/alledrogo.service";
+import {Observable, Subscription} from "rxjs";
 
 
 @Component({
@@ -8,14 +9,17 @@ import {AlledrogoService} from "../../../api/service/alledrogo.service";
   templateUrl: './basket-product-list.component.html',
   styleUrls: ['./basket-product-list.component.css']
 })
-export class BasketProductListComponent {
+export class BasketProductListComponent implements OnInit{
 
+  public products: Observable<Product[]> | undefined;
 
-  constructor(public alleService: AlledrogoService) {
+  constructor(private alleService: AlledrogoService) {}
+
+  ngOnInit() {
+    this.products = this.alleService.products;
   }
 
   onItemDelete = (product: Product) => {
     this.alleService.removeFromBasket(product);
-
   }
 }

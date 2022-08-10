@@ -15,6 +15,8 @@ import {RoutesConfig} from "../../../app-routing.module";
 export class AlledrogoNavbarComponent {
 
 
+  public products: Product[] = [];
+
   @Input() routes: { label: string, route: string }[] = [];
 
 
@@ -30,4 +32,9 @@ export class AlledrogoNavbarComponent {
     this.service.removeFromBasket(product);
   }
 
+  ngOnInit(): void {
+    this.service.products.subscribe(prod => {
+      this.products = prod
+    });
+  }
 }

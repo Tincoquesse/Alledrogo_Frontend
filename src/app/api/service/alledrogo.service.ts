@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Product} from "../model/product";
 import {environment} from "../../../environments/environment";
-import {Observable, tap} from 'rxjs';
+import {BehaviorSubject, Observable, tap} from 'rxjs';
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {TokenStorageService} from "../../auth/services/token-storage.service";
 
@@ -16,8 +16,9 @@ export class AlledrogoService {
               private tokenStorage: TokenStorageService) {
   }
 
+  private _products = new BehaviorSubject<Product[]>([]);
   count: number = 0;
-  products: Product[] = [];
+  readonly products = this._products.asObservable();
 
   increaseCounter = (): void => {
     this.count++;
@@ -55,7 +56,7 @@ export class AlledrogoService {
 
   addProductToBasket = (product: Product) => {
     this.increaseCounter();
-    this.products.push(product);
+    this._products.next([...this._products.value, product]);
     return this.http.post(`${environment.alledrogoEndpointUrl}product/addToBasket/${this.getBasketName()}/${product.productName}`, null)
       .subscribe();
   }
@@ -63,14 +64,14 @@ export class AlledrogoService {
   getProductsFromBasket = (): Observable<Product[]> => {
     return this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}product/getAllFromBasket/${this.getBasketName()}`)
       .pipe(tap(results => {
-        this.products = results;
+        this._products.next(results);
         this.count = results.length;
       }));
   }
 
   removeFromBasket = (product: Product) => {
     this.decreaseCounter();
-    this.products = this.products.filter(p => p.productName === product.productName)
+    this._products.next(this._products.value.filter(p => p.productName !== product.productName));
     this.http.delete(`${environment.alledrogoEndpointUrl}product/removeFromBasket/${this.getBasketName()}/${product.productName}`)
       .subscribe(
       );

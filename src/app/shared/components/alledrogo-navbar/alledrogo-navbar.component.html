@@ -30,13 +30,13 @@
               <span class="glyphicon glyphicon-shopping-cart"></span>
               {{service.count}} - Items in Cart<span class="caret"></span></a>
             <ul class="dropdown-menu dropdown-cart" role="menu">
-              <li *ngFor="let product of service.products">
+              <li *ngFor="let product of products">
                   <span class="item">
                     <span class="item-left">
-                        <img style="max-width: 5rem" src="{{product.imageURL}}" alt=""/>
+                        <img style="max-width: 5rem" src="{{product?.imageURL}}" alt=""/>
                         <span class="item-info">
-                            <span>{{product.productName}}</span>
-                            <span>price: {{product.productPrice}}$</span>
+                            <span>{{product?.productName}}</span>
+                            <span>price: {{product?.productPrice}}$</span>
                         </span>
                     </span>
                     <span class="item-right">
