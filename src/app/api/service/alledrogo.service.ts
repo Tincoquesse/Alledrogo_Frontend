@@ -17,15 +17,16 @@ export class AlledrogoService {
   }
 
   private _products = new BehaviorSubject<Product[]>([]);
-  count: number = 0;
   readonly products = this._products.asObservable();
+  private _counter = new BehaviorSubject<number>(0);
+  readonly counter = this._counter.asObservable();
 
   increaseCounter = (): void => {
-    this.count++;
+    this._counter.next(this._counter.value + 1);
   }
 
   decreaseCounter = (): void => {
-    this.count--;
+    this._counter.next(this._counter.value - 1);
   }
 
 
@@ -65,7 +66,7 @@ export class AlledrogoService {
     return this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}product/getAllFromBasket/${this.getBasketName()}`)
       .pipe(tap(results => {
         this._products.next(results);
-        this.count = results.length;
+        this._counter.next(results.length);
       }));
   }
 

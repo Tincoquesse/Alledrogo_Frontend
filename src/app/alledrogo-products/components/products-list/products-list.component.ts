@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AlledrogoService} from "../../../api/service/alledrogo.service";
 import {Product} from "../../../api/model/product";
 import {map} from "rxjs";
-import { JwtHelperService } from '@auth0/angular-jwt';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-products-list',
@@ -16,6 +16,17 @@ export class ProductsListComponent implements OnInit {
   constructor(private alleService: AlledrogoService, private jwtHelper: JwtHelperService) {
   }
 
+  isProductPresentInBasket(product: Product): boolean {
+    let flag = false;
+    this.alleService.products.subscribe((x) => {
+      x.forEach(item => {
+        if (item.productName == product.productName) {
+          flag = true
+        }
+      })
+    })
+    return flag;
+  }
 
   ngOnInit(): void {
     this.alleService.getProducts().pipe(
@@ -24,10 +35,10 @@ export class ProductsListComponent implements OnInit {
       this.products = results
     });
   }
+
   addItem = (product: Product) => {
-    if (!this.jwtHelper.isTokenExpired()) {
+    if (!this.jwtHelper.isTokenExpired() && !this.isProductPresentInBasket(product)) {
       this.alleService.addProductToBasket(product);
-      // this.alleService.increaseCounter();
     }
   }
 }

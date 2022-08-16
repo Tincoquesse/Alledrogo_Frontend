@@ -1,6 +1,6 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Product} from "../../../api/model/product";
-import {map} from "rxjs";
+import {Observable} from "rxjs";
 import {AlledrogoService} from "../../../api/service/alledrogo.service";
 import {TokenStorageService} from "../../../auth/services/token-storage.service";
 import {Router} from "@angular/router";
@@ -14,8 +14,8 @@ import {RoutesConfig} from "../../../app-routing.module";
 
 export class AlledrogoNavbarComponent {
 
-
-  public products: Product[] = [];
+  public counter: Observable<number> | undefined;
+  public products: Observable<Product[]> | undefined;
 
   @Input() routes: { label: string, route: string }[] = [];
 
@@ -33,8 +33,7 @@ export class AlledrogoNavbarComponent {
   }
 
   ngOnInit(): void {
-    this.service.products.subscribe(prod => {
-      this.products = prod
-    });
+    this.products = this.service.products;
+    this.counter = this.service.counter;
   }
 }
