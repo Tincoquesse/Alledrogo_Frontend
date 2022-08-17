@@ -13,6 +13,7 @@ import {AlledrogoRegisterModule} from "./alledrogo-register/alledrogo-register.m
 import {AuthModule} from "./auth/auth.module";
 import {AuthGuard} from "./auth/services/auth.guard";
 import {AlledrogoHomeModule} from "./alledrogo-home/alledrogo-home.module";
+import {AlledrogoOrderModule} from "./alledrogo-order/alledrogo-order.module";
 
 
 export function tokenGetter() {
@@ -36,6 +37,7 @@ export function tokenGetter() {
     AlledrogoRegisterModule,
     AuthModule,
     AlledrogoHomeModule,
+    AlledrogoOrderModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
