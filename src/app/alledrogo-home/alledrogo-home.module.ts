@@ -10,8 +10,7 @@ import {SharedModule} from "../shared/shared.module";
     AlledrogoHomePageComponent
   ],
   imports: [
-    CommonModule,
-    SharedModule
+    CommonModule
   ]
 })
 export class AlledrogoHomeModule { }

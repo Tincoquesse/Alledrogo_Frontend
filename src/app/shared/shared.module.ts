@@ -1,20 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {RouterModule} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
-import { AlledrogoNavbarComponent } from './components/alledrogo-navbar/alledrogo-navbar.component';
-import { AlledrogoTopLogoComponent } from './components/alledrogo-top-logo/alledrogo-top-logo.component';
-import { SumPipe } from './pipes/sum.pipe';
-
-
-
+import {AlledrogoNavbarComponent} from './components/alledrogo-navbar/alledrogo-navbar.component';
 
 
 @NgModule({
   declarations: [
     AlledrogoNavbarComponent,
-    AlledrogoTopLogoComponent,
-    SumPipe,
 
   ],
   imports: [
@@ -24,7 +17,6 @@ import { SumPipe } from './pipes/sum.pipe';
   ],
   exports: [
     AlledrogoNavbarComponent,
-    AlledrogoTopLogoComponent,
 
   ]
 })
