@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {Product} from "../model/product";
 import {environment} from "../../../environments/environment";
 import {BehaviorSubject, Observable, tap} from 'rxjs';
-import {JwtHelperService} from "@auth0/angular-jwt";
 import {TokenStorageService} from "../../auth/services/token-storage.service";
 
 
@@ -12,7 +11,7 @@ import {TokenStorageService} from "../../auth/services/token-storage.service";
 })
 export class AlledrogoService {
 
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService,
+  constructor(private http: HttpClient,
               private tokenStorage: TokenStorageService) {
   }
 
@@ -29,28 +28,6 @@ export class AlledrogoService {
     this._counter.next(this._counter.value - 1);
   }
 
-
-  getDecodedAccessToken(token: any): any {
-    try {
-      return this.jwtHelper.decodeToken(token);
-    } catch (Error) {
-      return null;
-    }
-  }
-
-  getBasketName(): string {
-    let token = this.tokenStorage.getAccessToken();
-    let tokenInfo = this.getDecodedAccessToken(token);
-    return tokenInfo.basketName;
-  }
-
-  getUserNameFromToken(): string {
-    let token = this.tokenStorage.getAccessToken();
-    let tokenInfo = this.getDecodedAccessToken(token);
-    return tokenInfo.name;
-  }
-
-
   getProducts = (): Observable<Product[]> => {
     return this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}product/getAll`);
   }
@@ -58,12 +35,12 @@ export class AlledrogoService {
   addProductToBasket = (product: Product) => {
     this.increaseCounter();
     this._products.next([...this._products.value, product]);
-    return this.http.post(`${environment.alledrogoEndpointUrl}product/addToBasket/${this.getBasketName()}/${product.productName}`, null)
+    return this.http.post(`${environment.alledrogoEndpointUrl}product/addToBasket/${this.tokenStorage.getBasketName()}/${product.productName}`, null)
       .subscribe();
   }
 
   getProductsFromBasket = (): Observable<Product[]> => {
-    return this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}product/getAllFromBasket/${this.getBasketName()}`)
+    return this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}product/getAllFromBasket/${this.tokenStorage.getBasketName()}`)
       .pipe(tap(results => {
         this._products.next(results);
         this._counter.next(results.length);
@@ -73,7 +50,7 @@ export class AlledrogoService {
   removeFromBasket = (product: Product) => {
     this.decreaseCounter();
     this._products.next(this._products.value.filter(p => p.productName !== product.productName));
-    this.http.delete(`${environment.alledrogoEndpointUrl}product/removeFromBasket/${this.getBasketName()}/${product.productName}`)
+    this.http.delete(`${environment.alledrogoEndpointUrl}product/removeFromBasket/${this.tokenStorage.getBasketName()}/${product.productName}`)
       .subscribe(
       );
   }

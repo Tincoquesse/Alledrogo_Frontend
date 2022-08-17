@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AlledrogoService} from "../../../api/service/alledrogo.service";
 
 @Component({
   selector: 'app-alledrogo-basket-page',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlledrogoBasketPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: AlledrogoService) { }
 
   ngOnInit(): void {
+    this.service.getProductsFromBasket();
+    console.log("basket page active")
   }
 
 }

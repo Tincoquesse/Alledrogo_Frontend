@@ -50,15 +50,15 @@ export class LoginFormComponent implements OnInit {
   }
 
   OnRegister() {
-    this.router.navigateByUrl(RoutesConfig.registerPage).then(r => NEVER);
+    this.router.navigateByUrl(RoutesConfig.registerPage);
   }
 
   onCancel() {
-    this.router.navigateByUrl(RoutesConfig.productsPage).then(r => NEVER);
+    this.router.navigateByUrl(RoutesConfig.productsPage);
   }
 
   onLogOut() {
     this.tokenStorage.clearTokens();
-    window.location.assign(RoutesConfig.loginPage);
+    this.router.navigateByUrl(RoutesConfig.loginPage);
   }
 }

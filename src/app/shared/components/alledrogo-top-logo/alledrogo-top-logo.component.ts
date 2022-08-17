@@ -7,20 +7,10 @@ import {AlledrogoService} from "../../../api/service/alledrogo.service";
   templateUrl: './alledrogo-top-logo.component.html',
   styleUrls: ['./alledrogo-top-logo.component.css']
 })
-export class AlledrogoTopLogoComponent implements OnInit{
+export class AlledrogoTopLogoComponent {
 
   path: string = "assets/images/linkedin_banner_thick.jpg";
   altText: string = "first image"
-
-  constructor(private alleService: AlledrogoService, public tokenStorage: TokenStorageService ) { }
-
-  ngOnInit(): void {
-    this.getUsername();
-  }
-
-  getUsername():string {
-    return this.alleService.getUserNameFromToken();
-  }
 
 
 }

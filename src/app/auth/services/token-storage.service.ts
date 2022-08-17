@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {JwtHelperService} from "@auth0/angular-jwt";
 
 @Injectable({
@@ -13,7 +13,7 @@ export class TokenStorageService {
   }
 
   saveTokens(accessTok: string, refreshTok: string) {
-    if (!accessTok || !refreshTok){
+    if (!accessTok || !refreshTok) {
       return
     }
     window.localStorage.removeItem(this.ACCESS_TOKEN);
@@ -23,23 +23,40 @@ export class TokenStorageService {
     window.localStorage.setItem(this.REFRESH_TOKEN, refreshTok);
   }
 
-  getAccessToken():any {
-    return window.localStorage.getItem(this.ACCESS_TOKEN);
-    }
-
-  getRefreshToken() {
-    return window.localStorage.getItem(this.REFRESH_TOKEN);
-  }
-  isLoggedIn(): boolean{
+  isLoggedIn(): boolean {
     return this.tokenIsPresent() && !this.jwtHelper.isTokenExpired(this.getAccessToken());
   }
 
-  tokenIsNotPresent():boolean {
-    return !window.localStorage.getItem(this.ACCESS_TOKEN);
+  tokenIsPresent(): boolean {
+    return !!window.localStorage.getItem(this.ACCESS_TOKEN);
   }
 
-  tokenIsPresent():boolean {
-    return !!window.localStorage.getItem(this.ACCESS_TOKEN);
+  getAccessToken(): any {
+    return window.localStorage.getItem(this.ACCESS_TOKEN);
+  }
+
+  getDecodedAccessToken(token: any): any {
+    try {
+      return this.jwtHelper.decodeToken(token);
+    } catch (Error) {
+      return null;
+    }
+  }
+
+  getBasketName(): string {
+    let token = this.getAccessToken();
+    let tokenInfo = this.getDecodedAccessToken(token);
+    return tokenInfo.basketName;
+  }
+
+  getUserNameFromToken(): string {
+    let token = this.getAccessToken();
+    let tokenInfo = this.getDecodedAccessToken(token);
+    return tokenInfo.name;
+  }
+
+  getRefreshToken() {
+    return window.localStorage.getItem(this.REFRESH_TOKEN);
   }
 
   clearTokens() {
@@ -47,8 +64,5 @@ export class TokenStorageService {
     window.localStorage.removeItem(this.REFRESH_TOKEN);
   }
 
-  isTokenExpired(): boolean{
-    return this.jwtHelper.isTokenExpired(this.getAccessToken());
-  }
 
 }

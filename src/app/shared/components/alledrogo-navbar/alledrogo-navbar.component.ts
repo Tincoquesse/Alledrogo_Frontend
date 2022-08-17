@@ -20,7 +20,7 @@ export class AlledrogoNavbarComponent {
   @Input() routes: { label: string, route: string }[] = [];
 
 
-  constructor(public service: AlledrogoService, private tokenStorage: TokenStorageService,
+  constructor(public service: AlledrogoService, public tokenStorage: TokenStorageService,
               private router: Router) {
   }
 

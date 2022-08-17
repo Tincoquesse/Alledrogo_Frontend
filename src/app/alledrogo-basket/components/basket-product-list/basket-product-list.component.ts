@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Product} from "../../../api/model/product";
 import {AlledrogoService} from "../../../api/service/alledrogo.service";
-import {Observable, Subscription} from "rxjs";
+import {Observable} from "rxjs";
 
 
 @Component({
