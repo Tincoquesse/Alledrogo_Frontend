@@ -1,5 +1,5 @@
 export interface Order {
-
+  "username": string,
   "firstAndLastName": string,
   "basketName": string,
   "street": string,

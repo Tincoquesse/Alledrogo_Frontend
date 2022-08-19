@@ -1,5 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Product} from "../../../api/model/product";
+import {TokenStorageService} from "../../../auth/services/token-storage.service";
+import {Router} from "@angular/router";
+import {RoutesConfig} from "../../../app-routing.module";
 
 @Component({
   selector: 'app-product-card',
@@ -13,7 +16,7 @@ export class ProductCardComponent implements OnInit {
 
   @Output() onDoneClick = new EventEmitter<Product>();
 
-  constructor() { }
+  constructor(public tokenStorage: TokenStorageService, private route: Router) { }
 
   ngOnInit(): void {
   }
@@ -25,4 +28,8 @@ export class ProductCardComponent implements OnInit {
   doneClick = () => {
     this.onDoneClick.emit(this.product);
   };
+
+  toLogWindowClick() {
+    this.route.navigateByUrl(RoutesConfig.loginPage);
+  }
 }

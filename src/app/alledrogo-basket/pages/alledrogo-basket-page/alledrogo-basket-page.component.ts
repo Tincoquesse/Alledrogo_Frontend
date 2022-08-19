@@ -6,13 +6,8 @@ import {AlledrogoService} from "../../../api/service/alledrogo.service";
   templateUrl: './alledrogo-basket-page.component.html',
   styleUrls: ['./alledrogo-basket-page.component.css']
 })
-export class AlledrogoBasketPageComponent implements OnInit {
+export class AlledrogoBasketPageComponent{
 
-  constructor(private service: AlledrogoService) { }
 
-  ngOnInit(): void {
-    this.service.getProductsFromBasket();
-    console.log("basket page active")
-  }
 
 }

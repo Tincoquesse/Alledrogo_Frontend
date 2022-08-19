@@ -26,7 +26,11 @@
       <div class="product-info smart-form">
         <div class="row">
           <div class="col-md-6 col-sm-6 col-xs-6">
-            <a (click)="doneClick()" (change)="refreshPage()" class="btn btn-success">Add to cart</a>
+            <a *ngIf="tokenStorage.isLoggedIn()" (click)="doneClick()" (change)="refreshPage()" class="btn btn-success">Add
+              to cart</a>
+            <a style="background-color: #6d7a83; border: #6d7a83"
+               *ngIf="!tokenStorage.isLoggedIn()" (click)="toLogWindowClick()" (change)="refreshPage()"
+               class="btn btn-success">Log In to add</a>
           </div>
         </div>
       </div>
