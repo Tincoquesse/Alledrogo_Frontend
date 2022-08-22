@@ -10,3 +10,6 @@ button {
 td {
   margin: 0px auto;
 }
+.order-btn{
+  right: 10px;
+}

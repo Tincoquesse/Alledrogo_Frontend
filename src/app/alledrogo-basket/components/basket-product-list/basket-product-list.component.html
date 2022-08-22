@@ -1,11 +1,4 @@
 <div class="container ">
-<!--  <div class="text-center mb-5">-->
-<!--    <h3>Cart</h3>-->
-<!--    <p class="lead">Products({{alleService.counter|async}} items)</p>-->
-<!--  </div>-->
-<!--    <app-basket-card (onDoneClick)="onItemDelete($event)"-->
-<!--      *ngFor="let product of products | async" [product]="product"></app-basket-card>-->
-<!--</div>-->
 <table class="table table-light table-hover table-sm">
   <caption>
     Products ({{alleService.counter|async}} items)
@@ -42,9 +35,10 @@
     <td></td>
     <td></td>
     <td style="font-size: 1.5em">$ {{products | async | sum}}</td>
-
-
-    </tr>
+  </tr>
   </tbody>
 </table>
+  <button type="button" class="btn btn-success mb order-btn">
+    <i class="fas fa-plus-circle"></i> Make Order
+  </button>
 </div>
