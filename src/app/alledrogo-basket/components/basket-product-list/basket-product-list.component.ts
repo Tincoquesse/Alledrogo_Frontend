@@ -13,7 +13,7 @@ export class BasketProductListComponent implements OnInit{
 
   public products: Observable<Product[]> | undefined;
 
-  constructor(private alleService: AlledrogoService) {}
+  constructor(public alleService: AlledrogoService) {}
 
   ngOnInit() {
     this.products = this.alleService.products;
@@ -21,5 +21,9 @@ export class BasketProductListComponent implements OnInit{
 
   onItemDelete = (product: Product) => {
     this.alleService.removeFromBasket(product);
+  }
+
+  details(product: Product) {
+
   }
 }

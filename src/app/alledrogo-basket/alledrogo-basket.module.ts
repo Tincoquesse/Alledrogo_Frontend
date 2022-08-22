@@ -4,6 +4,8 @@ import {BasketCardComponent} from "./components/basket-card/basket-card.componen
 import {BasketProductListComponent} from "./components/basket-product-list/basket-product-list.component";
 import { AlledrogoBasketPageComponent } from './pages/alledrogo-basket-page/alledrogo-basket-page.component';
 import {FormsModule} from "@angular/forms";
+import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
+import { SumPipe } from './pipes/sum.pipe';
 
 
 
@@ -11,7 +13,9 @@ import {FormsModule} from "@angular/forms";
   declarations: [
     AlledrogoBasketPageComponent,
     BasketProductListComponent,
-    BasketCardComponent
+    BasketCardComponent,
+    BasketSummaryComponent,
+    SumPipe
   ],
     imports: [
         CommonModule,

@@ -50,7 +50,7 @@ export class AlledrogoService {
   removeFromBasket = (product: Product) => {
     this.decreaseCounter();
     this._products.next(this._products.value.filter(p => p.productName !== product.productName));
-    this.http.delete(`${environment.alledrogoEndpointUrl}product/removeFromBasket/${this.tokenStorage.getBasketName()}/${product.productName}`)
+    this.http.delete(`${environment.alledrogoEndpointUrl}product/fromBasket/${this.tokenStorage.getBasketName()}/${product.productName}`)
       .subscribe();
   }
 }

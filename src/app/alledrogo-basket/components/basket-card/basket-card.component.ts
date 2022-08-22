@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Product} from "../../../api/model/product";
 
 @Component({
@@ -10,10 +10,6 @@ export class BasketCardComponent {
 
   @Input() product: Product|undefined;
   @Output() onDoneClick = new EventEmitter<Product>();
-
-  constructor() { }
-
-
 
   doneClick = () => {
     this.onDoneClick.emit(this.product);

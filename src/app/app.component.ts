@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
       route: RoutesConfig.productsPage,
     },
     {
-      label: 'Basket',
+      label: 'Shopping Cart',
       route: RoutesConfig.basketPage,
     },
     {

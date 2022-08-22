@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../../auth/services/authentication.service";
 import {Router} from "@angular/router";
 import {RoutesConfig} from "../../../app-routing.module";
@@ -17,9 +17,9 @@ import {AlledrogoService} from "../../../api/service/alledrogo.service";
 })
 export class LoginFormComponent implements OnInit {
 
-  form: any | undefined = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
+  form = new FormGroup({
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
   });
 
   constructor(private auth: AuthenticationService,
@@ -34,20 +34,27 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    let username = this.form.get('username').value;
-    let password = this.form.get('password').value;
-    if (username && password) {
-      this.auth.login(username, password)
+    if (this.form.valid) {
+      this.auth.login(
+        this.form?.controls['username'].value,
+        this.form?.controls['password'].value)
         .pipe(
           map(data => data as AuthResponse),
           tap(response => this.tokenStorage.saveTokens(response.access_token, response.refresh_token)),
           switchMap(() => this.service.getProductsFromBasket()))
         .subscribe(() => {
-
           this.router.navigateByUrl(RoutesConfig.productsPage);
         });
     }
   }
+
+  hasRequiredError = (): boolean =>
+    !!(this.form?.controls['username'].errors?.hasOwnProperty('required')
+      && this.form?.controls['username'].touched);
+
+  hasPasswordRequiredError = (): boolean =>
+    !!(this.form?.controls['password'].errors?.hasOwnProperty('required')
+      && this.form?.controls['password'].touched);
 
   OnRegister() {
     this.router.navigateByUrl(RoutesConfig.registerPage);

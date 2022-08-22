@@ -28,7 +28,7 @@ export class AuthenticationService {
       password: password,
       roles: []
     }
-    return this.http.post<User>(`${environment.authEndpoint}user/save`, user)
+    return this.http.post<User>(`${environment.authEndpoint}user`, user)
   }
 }
 
