@@ -42,8 +42,8 @@ export function tokenGetter() {
       config: {
         tokenGetter: tokenGetter,
         allowedDomains: ["localhost:8080"],
-        disallowedRoutes: ["http://localhost:8080/api/login", "http://localhost:8080/shop/product/getAll",
-          "http://localhost:8080/api/user/save"],
+        disallowedRoutes: ["http://localhost:8080/api/login", "http://localhost:8080/shop/products",
+          "http://localhost:8080/api/user"],
         throwNoTokenError: true,
       },
     }),

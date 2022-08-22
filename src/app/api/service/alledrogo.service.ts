@@ -29,18 +29,18 @@ export class AlledrogoService {
   }
 
   getProducts = (): Observable<Product[]> => {
-    return this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}product/getAll`);
+    return this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}products`);
   }
 
   addProductToBasket = (product: Product) => {
     this.increaseCounter();
     this._products.next([...this._products.value, product]);
-    return this.http.post(`${environment.alledrogoEndpointUrl}product/addToBasket/${this.tokenStorage.getBasketName()}/${product.productName}`, null)
+    return this.http.post(`${environment.alledrogoEndpointUrl}product/toBasket/${this.tokenStorage.getBasketName()}/${product.productName}`, null)
       .subscribe();
   }
 
   getProductsFromBasket = (): Observable<Product[]> => {
-    return this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}product/getAllFromBasket/${this.tokenStorage.getBasketName()}`)
+    return this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}products/fromBasket/${this.tokenStorage.getBasketName()}`)
       .pipe(tap(results => {
         this._products.next(results);
         this._counter.next(results.length);
