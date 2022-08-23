@@ -53,5 +53,10 @@ export class AlledrogoService {
     this.http.delete(`${environment.alledrogoEndpointUrl}product/fromBasket/${this.tokenStorage.getBasketName()}/${product.productName}`)
       .subscribe();
   }
+
+  clearProductsAndCounter() {
+    this._products.next([]);
+    this._counter.next(0);
+  }
 }
 

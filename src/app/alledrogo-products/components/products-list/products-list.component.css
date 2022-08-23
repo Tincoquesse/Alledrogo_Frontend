@@ -1,6 +1,12 @@
 .container-products{
+  margin-top: 3em;
   display: flex;
-  flex-direction: row;
+  flex-grow: 1;
+  gap: 2em;
+  flex-flow: row wrap;
+  justify-content: space-around;
+
+
 }
 
 

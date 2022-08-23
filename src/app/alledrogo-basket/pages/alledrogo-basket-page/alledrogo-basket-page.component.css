@@ -1,6 +1,5 @@
 
-.basket-page{
-  display: inline-flex;
-  position: relative;
-  top: 8rem;
+.basket-page {
+  display: flex;
+  justify-content: center;
 }

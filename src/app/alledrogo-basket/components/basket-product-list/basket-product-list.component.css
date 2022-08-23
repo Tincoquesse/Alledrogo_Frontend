@@ -10,6 +10,12 @@ button {
 td {
   margin: 0px auto;
 }
-.order-btn{
-  right: 10px;
+
+.container-basket{
+  width: 80%;
+  margin-top: 6em;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+
 }

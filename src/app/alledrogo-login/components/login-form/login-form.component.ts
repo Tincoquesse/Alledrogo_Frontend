@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
+// @ts-ignore
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../../auth/services/authentication.service";
+// @ts-ignore
 import {Router} from "@angular/router";
 import {RoutesConfig} from "../../../app-routing.module";
-import {map, NEVER, switchMap, tap} from "rxjs";
+import {map, switchMap, tap} from "rxjs";
 import {AuthResponse} from "../../../auth/model/authResponse";
 import {TokenStorageService} from "../../../auth/services/token-storage.service";
 import {JwtHelperService} from "@auth0/angular-jwt";
@@ -66,6 +68,7 @@ export class LoginFormComponent implements OnInit {
 
   onLogOut() {
     this.tokenStorage.clearTokens();
+    this.service.clearProductsAndCounter();
     this.router.navigateByUrl(RoutesConfig.loginPage);
   }
 }
