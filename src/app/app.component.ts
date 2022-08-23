@@ -34,9 +34,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.service.getProducts().subscribe();
     if(this.tokenService.isLoggedIn()) {
       this.service.getProductsFromBasket().subscribe();
-      this.service.getProducts().subscribe();
     }
   }
 }

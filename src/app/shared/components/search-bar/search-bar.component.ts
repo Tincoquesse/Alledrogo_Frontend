@@ -7,15 +7,17 @@ import {debounceTime} from "rxjs";
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.css']
 })
-export class SearchBarComponent implements OnInit {
+export class SearchBarComponent {
 
   @Output() onValueChange = new EventEmitter<string>();
 
   searchInput = new FormControl('');
 
-  ngOnInit() {
-    this.searchInput.valueChanges.pipe(
-      debounceTime(600),
-    ).subscribe(value => this.onValueChange.emit(value));
-  }
+  // ngOnInit() {
+  //   this.searchInput.valueChanges.pipe(
+  //     debounceTime(600),
+  //   ).subscribe(value => this.onValueChange.emit(value));
+  // }
+
+
 }

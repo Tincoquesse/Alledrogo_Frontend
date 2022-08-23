@@ -64,5 +64,11 @@ export class AlledrogoService {
     this._basketProducts.next([]);
     this._counter.next(0);
   }
+
+  productsFiler(searchTerm: string) {
+    this._products.next(this._products.value.filter(item => {
+      item.productName.toLowerCase().includes(searchTerm.toLowerCase());
+    }))
+  }
 }
 

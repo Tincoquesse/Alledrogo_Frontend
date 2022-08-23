@@ -36,4 +36,6 @@ export class AlledrogoNavbarComponent {
     this.products = this.service.basketProducts;
     this.counter = this.service.counter;
   }
+
+
 }
