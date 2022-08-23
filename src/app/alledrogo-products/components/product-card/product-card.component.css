@@ -2,7 +2,7 @@
 .card{
   padding: 10px;
   border-radius: 10px;
-  max-width: 18em;
+  max-width: 15em;
   margin: auto;
 }
 .card:hover{
@@ -13,5 +13,5 @@
 
 }
 .card-img-top{
-  max-height: 10em;
+  max-height: 8em;
 }

@@ -3,6 +3,7 @@ import {Product} from "../../../api/model/product";
 import {TokenStorageService} from "../../../auth/services/token-storage.service";
 import {Router} from "@angular/router";
 import {RoutesConfig} from "../../../app-routing.module";
+import {AlledrogoService} from "../../../api/service/alledrogo.service";
 
 @Component({
   selector: 'app-product-card',
@@ -16,7 +17,8 @@ export class ProductCardComponent implements OnInit {
 
   @Output() onDoneClick = new EventEmitter<Product>();
 
-  constructor(public tokenStorage: TokenStorageService, private route: Router) { }
+  constructor(public tokenStorage: TokenStorageService, private route: Router,
+              public service: AlledrogoService) { }
 
   ngOnInit(): void {
   }

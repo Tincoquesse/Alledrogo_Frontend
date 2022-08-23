@@ -65,10 +65,13 @@ export class AlledrogoService {
     this._counter.next(0);
   }
 
-  productsFiler(searchTerm: string) {
-    this._products.next(this._products.value.filter(item => {
-      item.productName.toLowerCase().includes(searchTerm.toLowerCase());
-    }))
+
+  isProductInBasket(product: Product | undefined): boolean {
+    if (product != undefined) {
+      return this._basketProducts.value.includes(product);
+    } else {
+      return false;
+    }
   }
 }
 

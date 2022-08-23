@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Product} from "../../../api/model/product";
 import {AlledrogoService} from "../../../api/service/alledrogo.service";
 import {Observable} from "rxjs";
+import {Router} from "@angular/router";
+import {RoutesConfig} from "../../../app-routing.module";
 
 
 @Component({
@@ -13,7 +15,7 @@ export class BasketProductListComponent implements OnInit{
 
   public products: Observable<Product[]> | undefined;
 
-  constructor(public alleService: AlledrogoService) {}
+  constructor(public alleService: AlledrogoService, private router: Router) {}
 
   ngOnInit() {
     this.products = this.alleService.basketProducts;
@@ -24,6 +26,9 @@ export class BasketProductListComponent implements OnInit{
   }
 
   details(product: Product) {
+  }
 
+  onSubmit() {
+    this.router.navigateByUrl(RoutesConfig.orderForm);
   }
 }
