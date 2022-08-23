@@ -73,5 +73,9 @@ export class AlledrogoService {
       return false;
     }
   }
+
+  basketIsEmpty(): boolean {
+    return this._basketProducts.value.length === 0;
+  }
 }
 

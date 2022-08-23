@@ -31,7 +31,6 @@ export class LoginFormComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.jwtHelper.isTokenExpired()) {
-      console.log("you are already logged in");
     }
   }
 
