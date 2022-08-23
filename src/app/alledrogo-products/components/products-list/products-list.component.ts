@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AlledrogoService} from "../../../api/service/alledrogo.service";
 import {Product} from "../../../api/model/product";
-import {map} from "rxjs";
+import {map, Observable} from "rxjs";
 import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Component({
@@ -11,14 +11,14 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 })
 export class ProductsListComponent implements OnInit {
 
-  products: Product[] = [];
+  public products: Observable<Product[]> | undefined;
 
   constructor(private alleService: AlledrogoService, private jwtHelper: JwtHelperService) {
   }
 
   isProductPresentInBasket(product: Product): boolean {
     let flag = false;
-    this.alleService.products.subscribe((x) => {
+    this.alleService.basketProducts.subscribe((x) => {
       x.forEach(item => {
         if (item.productName == product.productName) {
           flag = true
@@ -29,11 +29,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.alleService.getProducts().pipe(
-      map(data => data as Product[])
-    ).subscribe(results => {
-      this.products = results
-    });
+    this.products = this.alleService.products;
   }
 
   addItem = (product: Product) => {

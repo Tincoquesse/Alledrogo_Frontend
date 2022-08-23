@@ -16,7 +16,7 @@ export class BasketProductListComponent implements OnInit{
   constructor(public alleService: AlledrogoService) {}
 
   ngOnInit() {
-    this.products = this.alleService.products;
+    this.products = this.alleService.basketProducts;
   }
 
   onItemDelete = (product: Product) => {

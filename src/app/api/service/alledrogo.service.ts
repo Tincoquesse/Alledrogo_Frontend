@@ -14,9 +14,12 @@ export class AlledrogoService {
   constructor(private http: HttpClient,
               private tokenStorage: TokenStorageService) {
   }
-
   private _products = new BehaviorSubject<Product[]>([]);
   readonly products = this._products.asObservable();
+
+  private _basketProducts = new BehaviorSubject<Product[]>([]);
+  readonly basketProducts = this._basketProducts.asObservable();
+
   private _counter = new BehaviorSubject<number>(0);
   readonly counter = this._counter.asObservable();
 
@@ -29,33 +32,36 @@ export class AlledrogoService {
   }
 
   getProducts = (): Observable<Product[]> => {
-    return this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}products`);
-  }
-
-  addProductToBasket = (product: Product) => {
-    this.increaseCounter();
-    this._products.next([...this._products.value, product]);
-    return this.http.post(`${environment.alledrogoEndpointUrl}product/toBasket/${this.tokenStorage.getBasketName()}/${product.productName}`, null)
-      .subscribe();
+    return this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}products`)
+      .pipe(tap(results => {
+        this._products.next(results);
+      }));
   }
 
   getProductsFromBasket = (): Observable<Product[]> => {
     return this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}products/fromBasket/${this.tokenStorage.getBasketName()}`)
       .pipe(tap(results => {
-        this._products.next(results);
+        this._basketProducts.next(results);
         this._counter.next(results.length);
       }));
   }
 
+  addProductToBasket = (product: Product) => {
+    this.increaseCounter();
+    this._basketProducts.next([...this._basketProducts.value, product]);
+    return this.http.post(`${environment.alledrogoEndpointUrl}product/toBasket/${this.tokenStorage.getBasketName()}/${product.productName}`, null)
+      .subscribe();
+  }
+
   removeFromBasket = (product: Product) => {
     this.decreaseCounter();
-    this._products.next(this._products.value.filter(p => p.productName !== product.productName));
+    this._basketProducts.next(this._basketProducts.value.filter(p => p.productName !== product.productName));
     this.http.delete(`${environment.alledrogoEndpointUrl}product/fromBasket/${this.tokenStorage.getBasketName()}/${product.productName}`)
       .subscribe();
   }
 
   clearProductsAndCounter() {
-    this._products.next([]);
+    this._basketProducts.next([]);
     this._counter.next(0);
   }
 }

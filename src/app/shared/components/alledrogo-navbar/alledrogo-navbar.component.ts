@@ -33,7 +33,7 @@ export class AlledrogoNavbarComponent {
   }
 
   ngOnInit(): void {
-    this.products = this.service.products;
+    this.products = this.service.basketProducts;
     this.counter = this.service.counter;
   }
 }
