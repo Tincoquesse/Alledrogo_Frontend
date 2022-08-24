@@ -25,7 +25,7 @@
     </div>
   </div>
   <app-loading-spinner *ngIf="authService.isLoading$|async">Is Loading...</app-loading-spinner>
-  <div class="alert alert-warning " role="alert" *ngIf="errorSubmit">
+  <div style="text-align: center" class="alert alert-warning " role="alert" *ngIf="errorSubmit">
     {{ errorMessage }}
   </div>
 </div>

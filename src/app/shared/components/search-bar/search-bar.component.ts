@@ -19,5 +19,4 @@ export class SearchBarComponent {
   //   ).subscribe(value => this.onValueChange.emit(value));
   // }
 
-
 }

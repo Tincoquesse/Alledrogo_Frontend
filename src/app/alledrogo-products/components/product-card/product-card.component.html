@@ -2,8 +2,8 @@
 <div class="card">
   <img src="{{product?.imageURL}}" class="card-img-top" alt="{{product?.productName}}">
   <div class="card-body">
-    <h5 class="card-title">{{product?.productName}}</h5>
-    <p class="card-text">$ {{product?.productPrice}}</p>
+    <h5 style="text-align: center" class="card-title">{{product?.productName}}</h5>
+    <p style="text-align: center" class="card-text">$ {{product?.productPrice}}</p>
 
     <a *ngIf="tokenStorage.isLoggedIn() && !service.isProductInBasket(product)" (click)="doneClick()"
        (change)="refreshPage()" class="btn btn-success">Add
