@@ -25,7 +25,7 @@ export class RegisterFormComponent {
     password: new FormControl('', [Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$')])
   });
 
-  constructor(private router: Router, private alleService: AlledrogoService,
+  constructor(private router: Router,
               public authService: AuthenticationService) {
   }
 

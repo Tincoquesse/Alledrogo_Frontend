@@ -28,7 +28,7 @@ export class LoginFormComponent implements OnInit {
     password: new FormControl('', Validators.required)
   });
 
-  constructor(private auth: AuthenticationService,
+  constructor(public auth: AuthenticationService,
               public tokenStorage: TokenStorageService, private router: Router,
               public jwtHelper: JwtHelperService, private service: AlledrogoService) {
   }
