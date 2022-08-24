@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { AlledrogoRegisterPageComponent } from './pages/alledrogo-register-page/alledrogo-register-page.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import {SharedModule} from "../shared/shared.module";
 
 
 
@@ -11,10 +12,11 @@ import {ReactiveFormsModule} from "@angular/forms";
     RegisterFormComponent,
     AlledrogoRegisterPageComponent
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        SharedModule
+    ],
   exports: [AlledrogoRegisterPageComponent]
 })
 export class AlledrogoRegisterModule { }

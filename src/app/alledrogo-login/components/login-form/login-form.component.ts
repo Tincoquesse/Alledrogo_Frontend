@@ -10,6 +10,7 @@ import {AuthResponse} from "../../../auth/model/authResponse";
 import {TokenStorageService} from "../../../auth/services/token-storage.service";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {AlledrogoService} from "../../../api/service/alledrogo.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 
 @Component({
@@ -18,6 +19,9 @@ import {AlledrogoService} from "../../../api/service/alledrogo.service";
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
+
+  errorSubmit: boolean = false;
+  errorMessage: string = 'Wrong username or password';
 
   form = new FormGroup({
     username: new FormControl('', Validators.required),
@@ -44,18 +48,24 @@ export class LoginFormComponent implements OnInit {
           tap(response => this.tokenStorage.saveTokens(response.access_token, response.refresh_token)),
           switchMap(() => this.service.getProductsFromBasket()))
         .subscribe(() => {
-          this.router.navigateByUrl(RoutesConfig.productsPage);
-        });
+            console.log("ddddd")
+            this.router.navigateByUrl(RoutesConfig.productsPage);
+          },
+          (error): HttpErrorResponse => {
+            console.log(this.errorMessage);
+            this.errorSubmit = true;
+            return error
+          });
     }
   }
 
   hasRequiredError = (): boolean =>
     !!(this.form?.controls['username'].errors?.hasOwnProperty('required')
       && this.form?.controls['username'].touched);
-
   hasPasswordRequiredError = (): boolean =>
     !!(this.form?.controls['password'].errors?.hasOwnProperty('required')
       && this.form?.controls['password'].touched);
+
 
   OnRegister() {
     this.router.navigateByUrl(RoutesConfig.registerPage);

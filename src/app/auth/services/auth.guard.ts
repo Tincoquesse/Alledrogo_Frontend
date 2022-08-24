@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Router, CanActivate} from '@angular/router';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {CanActivate, Router} from '@angular/router';
 import {TokenStorageService} from "./token-storage.service";
 import {RoutesConfig} from "../../app-routing.module";
 
