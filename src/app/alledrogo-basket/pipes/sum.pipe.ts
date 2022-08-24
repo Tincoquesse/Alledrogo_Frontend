@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 import {Product} from "../../api/model/product";
 
 @Pipe({
@@ -6,16 +6,11 @@ import {Product} from "../../api/model/product";
 })
 export class SumPipe implements PipeTransform {
 
-  transform(value: Product[]|null): number {
-    let temp = 0;
+  transform(value: Product[] | null): number {
 
-    if (value != null) {
-      for (let product of value) {
-        temp += product.productPrice
-      }
-    }
-      return Number((Math.round(temp * 100)/100).toFixed(2));
-
+    let temp = value?.reduce(function (acc, obj) {
+      return acc + obj.productPrice;
+    }, 0);
+    return temp ? Number((Math.round(temp * 100) / 100).toFixed(2)) : 0;
   }
-
 }

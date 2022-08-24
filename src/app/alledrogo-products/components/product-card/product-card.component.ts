@@ -23,10 +23,7 @@ export class ProductCardComponent implements OnInit {
               private service: AlledrogoService) { }
 
   ngOnInit(): void {
-    console.log('product',this.product)
    this.isProductInBasket$ = this.service.isProductInBasket(this.product);
-   this.isProductInBasket$.subscribe(is => console.log('in basket', is))
-
   }
 
   doneClick = () => {

@@ -70,10 +70,6 @@ export class AlledrogoService {
 
 
   isProductInBasket = (product: Product | undefined): Observable<boolean> => this.basketProducts.pipe(
-    tap(list => {
-      console.log('list', list)
-      console.log('result ', product !== undefined ? list.includes(product) : false)
-    }),
       map(list => product !== undefined ? !!list.find(p => p.productName == product.productName) : false)
     )
 
