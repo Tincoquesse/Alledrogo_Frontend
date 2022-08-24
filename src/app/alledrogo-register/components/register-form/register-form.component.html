@@ -24,7 +24,7 @@
       <button aria-hidden="true" class="btn-default img-rounded" (click)="onCancel()" data-dismiss="modal" type="submit">Cancel</button>
     </div>
   </div>
-  <app-loading-spinner *ngIf="authService.isLoading$|async"></app-loading-spinner>
+  <app-loading-spinner *ngIf="authService.isLoading$|async">Is Loading...</app-loading-spinner>
   <div class="alert alert-warning " role="alert" *ngIf="errorSubmit">
     {{ errorMessage }}
   </div>

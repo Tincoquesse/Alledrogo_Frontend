@@ -28,7 +28,7 @@
       </button>
     </div>
   </div>
-  <app-loading-spinner *ngIf="auth.isLoading$|async"></app-loading-spinner>
+  <app-loading-spinner *ngIf="auth.isLoading$|async">Is loading...</app-loading-spinner>
   <div class="alert alert-warning " role="alert" *ngIf="errorSubmit">
     {{ errorMessage }}
   </div>

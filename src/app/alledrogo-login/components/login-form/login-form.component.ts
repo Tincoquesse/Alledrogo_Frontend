@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-// @ts-ignore
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../../auth/services/authentication.service";
-// @ts-ignore
 import {Router} from "@angular/router";
 import {RoutesConfig} from "../../../app-routing.module";
 import {map, switchMap, tap} from "rxjs";
@@ -48,7 +46,6 @@ export class LoginFormComponent implements OnInit {
           tap(response => this.tokenStorage.saveTokens(response.access_token, response.refresh_token)),
           switchMap(() => this.service.getProductsFromBasket()))
         .subscribe(() => {
-            console.log("ddddd")
             this.router.navigateByUrl(RoutesConfig.productsPage);
           },
           (error): HttpErrorResponse => {
