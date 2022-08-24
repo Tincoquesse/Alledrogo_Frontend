@@ -16,7 +16,6 @@ import {HttpErrorResponse} from "@angular/common/http";
 export class RegisterFormComponent {
 
   errorSubmit: boolean = false;
-  isLoading: boolean = false;
   errorMessage: string = '';
 
   form = new FormGroup({
