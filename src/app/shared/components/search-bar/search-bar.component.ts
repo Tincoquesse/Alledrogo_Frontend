@@ -14,9 +14,7 @@ export class SearchBarComponent {
   searchInput = new FormControl('');
 
   constructor(private service: AlledrogoService) {;
-
   }
-
 
   ngOnInit() {
     this.searchInput.valueChanges.pipe(
@@ -28,4 +26,7 @@ export class SearchBarComponent {
     });
   }
 
+  onReset() {
+
+  }
 }

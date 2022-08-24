@@ -1,2 +1,5 @@
-<input style="height: 3rem" [formControl]="searchInput" class="form-control" id="search-bar" placeholder="Search Products">
-<button class="btn btn-sm btn-success">Submit</button>
+<div>
+  <input style="height: 3rem" [formControl]="searchInput" class="form-control" id="search-bar"
+         placeholder="Search Products">
+  <button (submit)="onReset()" class="btn btn-sm btn-success">reset</button>
+</div>
