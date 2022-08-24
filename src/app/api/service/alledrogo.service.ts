@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Product} from "../model/product";
 import {environment} from "../../../environments/environment";
-import {BehaviorSubject, Observable, tap} from 'rxjs';
+import {BehaviorSubject, map, Observable, tap} from 'rxjs';
 import {TokenStorageService} from "../../auth/services/token-storage.service";
 
 
@@ -22,6 +22,9 @@ export class AlledrogoService {
 
   private _counter = new BehaviorSubject<number>(0);
   readonly counter = this._counter.asObservable();
+
+  private _searchProduct = new BehaviorSubject<string>('');
+  readonly searchProduct = this._searchProduct.asObservable();
 
   increaseCounter = (): void => {
     this._counter.next(this._counter.value + 1);
@@ -66,16 +69,26 @@ export class AlledrogoService {
   }
 
 
-  isProductInBasket(product: Product | undefined): boolean {
-    if (product != undefined) {
-      return this._basketProducts.value.includes(product);
-    } else {
-      return false;
-    }
-  }
+  isProductInBasket = (product: Product | undefined): Observable<boolean> => this.basketProducts.pipe(
+    tap(list => {
+      console.log('list', list)
+      console.log('result ', product !== undefined ? list.includes(product) : false)
+    }),
+      map(list => product !== undefined ? !!list.find(p => p.productName == product.productName) : false)
+    )
 
   basketIsEmpty(): boolean {
     return this._basketProducts.value.length === 0;
   }
+
+  xxx = (): Observable<Product[]> => this.products.pipe(
+    map(products => products.filter(p => {
+      // filter products by
+      // this._searchProduct.value;
+       return true
+    }))
+  )
+
+  zzz = (search: string) => this._searchProduct.next(search);
 }
 

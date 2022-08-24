@@ -4,6 +4,7 @@ import {TokenStorageService} from "../../../auth/services/token-storage.service"
 import {Router} from "@angular/router";
 import {RoutesConfig} from "../../../app-routing.module";
 import {AlledrogoService} from "../../../api/service/alledrogo.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-product-card',
@@ -14,17 +15,18 @@ export class ProductCardComponent implements OnInit {
 
 
   @Input() product: Product| undefined;
-
   @Output() onDoneClick = new EventEmitter<Product>();
 
+  isProductInBasket$: Observable<boolean> | undefined;
+
   constructor(public tokenStorage: TokenStorageService, private route: Router,
-              public service: AlledrogoService) { }
+              private service: AlledrogoService) { }
 
   ngOnInit(): void {
-  }
+    console.log('product',this.product)
+   this.isProductInBasket$ = this.service.isProductInBasket(this.product);
+   this.isProductInBasket$.subscribe(is => console.log('in basket', is))
 
-  refreshPage() {
-    window.location.reload();
   }
 
   doneClick = () => {

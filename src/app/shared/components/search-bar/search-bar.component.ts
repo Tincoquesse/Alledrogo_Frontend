@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {debounceTime} from "rxjs";
+import {AlledrogoService} from "../../../api/service/alledrogo.service";
 
 @Component({
   selector: 'app-search-bar',
@@ -9,14 +10,22 @@ import {debounceTime} from "rxjs";
 })
 export class SearchBarComponent {
 
-  @Output() onValueChange = new EventEmitter<string>();
 
   searchInput = new FormControl('');
 
-  // ngOnInit() {
-  //   this.searchInput.valueChanges.pipe(
-  //     debounceTime(600),
-  //   ).subscribe(value => this.onValueChange.emit(value));
-  // }
+  constructor(private service: AlledrogoService) {;
+
+  }
+
+
+  ngOnInit() {
+    this.searchInput.valueChanges.pipe(
+      debounceTime(600),
+    ).subscribe(value => {
+      console.log(value)
+      this.service.zzz(this.searchInput.value)
+      this.service.searchProduct.subscribe(x => console.log('xxx', x))
+    });
+  }
 
 }

@@ -19,9 +19,9 @@ export class RegisterFormComponent {
   errorMessage: string = '';
 
   form = new FormGroup({
-    name: new FormControl('', [Validators.minLength(5)]),
-    username: new FormControl('', [Validators.email]),
-    password: new FormControl('', [Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$')])
+    name: new FormControl('', [Validators.minLength(5), Validators.required]),
+    username: new FormControl('', [Validators.email, Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$')])
   });
 
   constructor(private router: Router,

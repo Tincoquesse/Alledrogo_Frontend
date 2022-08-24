@@ -8,12 +8,14 @@ export class SumPipe implements PipeTransform {
 
   transform(value: Product[]|null): number {
     let temp = 0;
+
     if (value != null) {
       for (let product of value) {
         temp += product.productPrice
       }
     }
-      return temp
+      return Number((Math.round(temp * 100)/100).toFixed(2));
+
   }
 
 }
