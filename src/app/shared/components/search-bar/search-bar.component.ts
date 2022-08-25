@@ -1,7 +1,9 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {debounceTime} from "rxjs";
 import {AlledrogoService} from "../../../api/service/alledrogo.service";
+import {Router} from "@angular/router";
+import {RoutesConfig} from "../../../app-routing.module";
 
 @Component({
   selector: 'app-search-bar',
@@ -13,20 +15,21 @@ export class SearchBarComponent {
 
   searchInput = new FormControl('');
 
-  constructor(private service: AlledrogoService) {;
+  constructor(private service: AlledrogoService, private router: Router) {
   }
 
   ngOnInit() {
     this.searchInput.valueChanges.pipe(
-      debounceTime(600),
+      debounceTime(500)
     ).subscribe(value => {
-      console.log(value)
-      this.service.zzz(this.searchInput.value)
-      this.service.searchProduct.subscribe(x => console.log('xxx', x))
+      this.router.navigateByUrl(RoutesConfig.productsPage);
+      this.service.updateSearchInput(this.searchInput.value)
+      this.service.searchProducts();
     });
   }
 
   onReset() {
-
+    this.searchInput.setValue('');
+    this.service.resetProductsSearch();
   }
 }

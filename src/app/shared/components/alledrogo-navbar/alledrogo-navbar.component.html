@@ -14,12 +14,10 @@
         </ul>
       </div>
 
-      <div class="navbar-nav">
-        <form class="navbar-form">
-          <div class="form-group">
-            <app-search-bar></app-search-bar>
-          </div>
-        </form>
+      <div class="navbar-brand">
+        <div>
+          <app-search-bar></app-search-bar>
+        </div>
       </div>
 
       <div *ngIf="tokenStorage.isLoggedIn()" class="navbar-brand">
@@ -48,13 +46,13 @@
                     </span>
                 </span>
               </li>
-
               <li class="divider"></li>
               <li><a class="text-center" (click)="viewCard()">View Cart</a></li>
             </ul>
           </li>
         </ul>
       </div>
+
     </div>
   </nav>
 </div>

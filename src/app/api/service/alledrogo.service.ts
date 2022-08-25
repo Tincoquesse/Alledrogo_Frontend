@@ -14,6 +14,8 @@ export class AlledrogoService {
   constructor(private http: HttpClient,
               private tokenStorage: TokenStorageService) {
   }
+
+  private _productsBase = new BehaviorSubject<Product[]>([]);
   private _products = new BehaviorSubject<Product[]>([]);
   readonly products = this._products.asObservable();
 
@@ -23,8 +25,8 @@ export class AlledrogoService {
   private _counter = new BehaviorSubject<number>(0);
   readonly counter = this._counter.asObservable();
 
-  private _searchProduct = new BehaviorSubject<string>('');
-  readonly searchProduct = this._searchProduct.asObservable();
+  private _searchProductName = new BehaviorSubject<string>('');
+  readonly searchProduct = this._searchProductName.asObservable();
 
   increaseCounter = (): void => {
     this._counter.next(this._counter.value + 1);
@@ -38,6 +40,7 @@ export class AlledrogoService {
     return this.http.get<Product[]>(`${environment.alledrogoEndpointUrl}products`)
       .pipe(tap(results => {
         this._products.next(results);
+        this._productsBase.next(results);
       }));
   }
 
@@ -70,21 +73,27 @@ export class AlledrogoService {
 
 
   isProductInBasket = (product: Product | undefined): Observable<boolean> => this.basketProducts.pipe(
-      map(list => product !== undefined ? !!list.find(p => p.productName == product.productName) : false)
-    )
+    map(list => product !== undefined ? !!list.find(p => p.productName == product.productName) : false)
+  )
 
   basketIsEmpty(): boolean {
     return this._basketProducts.value.length === 0;
   }
 
-  xxx = (): Observable<Product[]> => this.products.pipe(
-    map(products => products.filter(p => {
-      // filter products by
-      // this._searchProduct.value;
-       return true
-    }))
-  )
+  searchProducts(): void {
+    if (this._searchProductName.value === '') {
+      this._products.next(this._productsBase.value);
+    } else {
+      this._products.next(this._productsBase.value.filter((product) => {
+        return product.productName.toLowerCase().includes(this._searchProductName.value.toLowerCase());
+      }))
+    }
+  }
 
-  zzz = (search: string) => this._searchProduct.next(search);
+  resetProductsSearch = () => {
+    this._products.next(this._productsBase.value);
+  }
+
+  updateSearchInput = (search: string) => this._searchProductName.next(search);
 }
 
