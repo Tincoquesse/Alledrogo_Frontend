@@ -35,6 +35,9 @@ export class AuthenticationService {
     }
     return this.http.post<User>(`${environment.authEndpoint}user`, user);
   }
+  refreshToken() {
+    return this.http.get(`${environment.authEndpoint}token/refresh`);
+  }
 
 }
 

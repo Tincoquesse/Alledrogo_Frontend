@@ -44,7 +44,7 @@ const routes: Routes = [
   {
     path: RoutesConfig.orderForm,
     component: OrderSummaryComponent,
-    canActivate: [AuthGuard]},
+    canLoad: [AuthGuard]},
 
   {
     path: RoutesConfig.basketPage,

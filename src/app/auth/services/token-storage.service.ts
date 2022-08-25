@@ -49,11 +49,18 @@ export class TokenStorageService {
     return tokenInfo.basketName;
   }
 
-  getUserNameFromToken(): string {
+  getNameFromToken(): string {
     let token = this.getAccessToken();
     let tokenInfo = this.getDecodedAccessToken(token);
     return tokenInfo.name;
   }
+
+  getUserNameFromToken(): string {
+    let token = this.getAccessToken();
+    let tokenInfo = this.getDecodedAccessToken(token);
+    return tokenInfo.sub;
+  }
+
 
   getRefreshToken() {
     return window.localStorage.getItem(this.REFRESH_TOKEN);

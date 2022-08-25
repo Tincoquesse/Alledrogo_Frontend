@@ -4,6 +4,7 @@ import {Product} from "../model/product";
 import {environment} from "../../../environments/environment";
 import {BehaviorSubject, map, Observable, tap} from 'rxjs';
 import {TokenStorageService} from "../../auth/services/token-storage.service";
+import {Order} from "../model/order";
 
 
 @Injectable({
@@ -66,6 +67,10 @@ export class AlledrogoService {
       .subscribe();
   }
 
+  makeOrder = (order: Order) => {
+    return this.http.post(`${environment.alledrogoEndpointUrl}order`, order);
+  }
+
   clearProductsAndCounter() {
     this._basketProducts.next([]);
     this._counter.next(0);
@@ -76,7 +81,7 @@ export class AlledrogoService {
     map(list => product !== undefined ? !!list.find(p => p.productName == product.productName) : false)
   )
 
-  basketIsEmpty(): boolean {
+  isBasketEmpty(): boolean {
     return this._basketProducts.value.length === 0;
   }
 
