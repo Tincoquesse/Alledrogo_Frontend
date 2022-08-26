@@ -54,17 +54,21 @@ export class AlledrogoService {
   }
 
   addProductToBasket = (product: Product) => {
-    this.increaseCounter();
-    this._basketProducts.next([...this._basketProducts.value, product]);
+
     return this.http.post(`${environment.alledrogoEndpointUrl}product/toBasket/${this.tokenStorage.getBasketName()}/${product.productName}`, null)
-      .subscribe();
+      .subscribe(() => {
+        this.increaseCounter();
+        this._basketProducts.next([...this._basketProducts.value, product]);
+      });
   }
 
   removeFromBasket = (product: Product) => {
-    this.decreaseCounter();
-    this._basketProducts.next(this._basketProducts.value.filter(p => p.productName !== product.productName));
+
     this.http.delete(`${environment.alledrogoEndpointUrl}product/fromBasket/${this.tokenStorage.getBasketName()}/${product.productName}`)
-      .subscribe();
+      .subscribe(() => {
+        this.decreaseCounter();
+        this._basketProducts.next(this._basketProducts.value.filter(p => p.productName !== product.productName));
+      });
   }
 
   makeOrder = (order: Order) => {

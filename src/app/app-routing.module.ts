@@ -13,6 +13,7 @@ import {
 import {AuthGuard} from "./auth/services/auth.guard";
 import {AlledrogoHomePageComponent} from "./alledrogo-home/pages/alledrogo-home-page/alledrogo-home-page.component";
 import {OrderSummaryComponent} from "./alledrogo-order/components/order-summary/order-summary.component";
+import {OrderGuard} from "./auth/services/order.guard";
 
 export const enum RoutesConfig {
   homePage= 'alledrogo-home',
@@ -44,7 +45,8 @@ const routes: Routes = [
   {
     path: RoutesConfig.orderForm,
     component: OrderSummaryComponent,
-    canLoad: [AuthGuard]},
+    canActivate: [OrderGuard]
+  },
 
   {
     path: RoutesConfig.basketPage,

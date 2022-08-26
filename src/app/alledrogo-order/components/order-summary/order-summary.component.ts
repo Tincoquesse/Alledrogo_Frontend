@@ -55,7 +55,8 @@ export class OrderSummaryComponent {
                 this.router.navigateByUrl(RoutesConfig.basketPage);
               },
               (error): HttpErrorResponse => {
-                console.log(this.errorMessage);
+                console.log(error.error);
+                this.errorMessage = error.error;
                 this.errorSubmit = true;
                 return error
               });
