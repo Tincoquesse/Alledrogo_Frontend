@@ -1,0 +1,38 @@
+name: Angular S3 deploy
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: AKIA5RLTPQK5OJ43WBHV
+        aws-secret-access-key: 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
+        aws-region: eu-north-1
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
+
+    - name: Install dependencies
+      run: npm install
+
+#    - name: Run tests
+#      run: npm run test:headless
+
+    - name: Build
+      run: npm run build
+
+    - name: Deploy
+      if: success()
+      run: aws s3 sync ./dist/alledrogo-front-end s3://alledrogo.harmpro.click
