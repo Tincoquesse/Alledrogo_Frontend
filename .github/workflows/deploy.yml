@@ -12,8 +12,8 @@ jobs:
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: AKIA5RLTPQK5OJ43WBHV
-        aws-secret-access-key: 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
+        aws-access-key-id: ${{ AWS_SECRET_KEY_ID }}
+        aws-secret-access-key: ${{ AWS_CERCER_ACCESS_KEY }}
         aws-region: eu-north-1
 
     - name: Checkout
@@ -35,4 +35,4 @@ jobs:
 
     - name: Deploy
       if: success()
-      run: aws s3 sync ./dist/alledrogo-front-end s3://alledrogo.harmpro.click
+      run: aws s3 sync ./dist/alledrogo-front-end s3://allegrogo.harmpro.click
