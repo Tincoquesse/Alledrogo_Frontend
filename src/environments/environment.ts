@@ -4,8 +4,8 @@
 
 export const environment = {
   production: true,
-  alledrogoEndpointUrl: 'http://localhost:8080/shop/',
-  authEndpoint: 'http://localhost:8080/api/'
+  alledrogoEndpointUrl: 'http://alledrogo-app-env.eba-xqcmaukv.eu-north-1.elasticbeanstalk.com/shop/',
+  authEndpoint: 'http://alledrogo-app-env.eba-xqcmaukv.eu-north-1.elasticbeanstalk.com/api/'
 };
 
 /*
